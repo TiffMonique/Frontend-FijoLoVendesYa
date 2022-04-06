@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 import {
   faBookOpen,
   faCog,
@@ -13,7 +14,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
+// handleClick = async (e) => {
+//   e.preventDefault();
+//   await axios.post("http://localhost:4000/api/tienda/logout", {
+//     withCredentials: true,
+//   });
+//   router.push("/");
+// };
+
 function LeftNavbar() {
+  const router = useRouter();
   return (
     <div className={styles.navcontainer}>
       <div className={styles.logo}>
@@ -67,7 +77,7 @@ function LeftNavbar() {
               icon={faSignOutAlt}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
-            <a href="#">Logout</a>
+            <a href="/">Logout</a>
           </li>
         </ul>
       </div>
