@@ -8,16 +8,23 @@ export const FancyButton = () => {
     
 
     // the effect
-    useEffect(() => {
+    /*useEffect(() => {
         if (buttonText !== initialState) {
-
+            setButtonText("Suscribirse")
         } 
-    }, [buttonText])
+    }, [buttonText])*/
 
-    const changeText = (text) => setButtonText(text);
+    const changeText = (text) => {
+        console.log("cambiar texto");
+        if(buttonText == initialState) {
+            setButtonText("Cancelar Suscripcion")
+        } else {
+            setButtonText("Suscribirse")
+        }
+    };
 
     return (
-        <SubmitButton type="submit" onClick={() => changeText("Cancelar Suscripcion")} >{buttonText}</SubmitButton>
+        <SubmitButton type="submit" onClick={changeText} >{buttonText}</SubmitButton>
        
     )
 
