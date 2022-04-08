@@ -22,13 +22,18 @@ import "../components/carousel/CarouselDemo.css";
 
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
+import {usuarioContext} from '../contexto';
+import React from 'react';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
-      <Component {...pageProps} />
-      <NormalizerStyled />
-    </>
+    <usuarioContext.provider value = {usuarioContext}>
+      <>
+        <Component {...pageProps} />
+        <NormalizerStyled />
+      </>
+    </usuarioContext.provider>
+    
   );
 }
 
