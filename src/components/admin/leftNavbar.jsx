@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "../../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
+import UseUser from '../../hooks/UseUser';
 import {
   faBookOpen,
   faCog,
@@ -11,9 +13,41 @@ import {
   faMessage,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 function LeftNavbar() {
+  const router = useRouter();
+  const user = UseUser();
+  const handleClicLogOut = async () => {
+    await axios
+      .delete(
+        "http://localhost:4000/api/tienda/logout",
+        {},
+        { withCredentials: true }
+      )
+      .then((response) => {
+        user.cambiarContexto(false, false);
+        swal({
+          title: "LOGOUT EXITOSO",
+          text: response?.data?.message,
+          icon: "success",
+          button: "Aceptar",
+          timer: "1500",
+        });
+        router.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        swal({
+          title: "HA OCURRIDO UN ERROR",
+          text: err.response.data.message,
+          icon: "error",
+          button: "Aceptar",
+          timer: "1500",
+        });
+      });
+  }
   return (
     <div className={styles.navcontainer}>
       <div className={styles.logo}>
@@ -67,7 +101,7 @@ function LeftNavbar() {
               icon={faSignOutAlt}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
-            <a href="#">Logout</a>
+            <a href="#" onClick={handleClicLogOut}>Logout</a>
           </li>
         </ul>
       </div>

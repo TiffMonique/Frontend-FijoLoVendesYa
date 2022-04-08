@@ -11,12 +11,8 @@ export const FancyButton = () => {
             setButtonText("Suscribirse")
         } 
     }, [buttonText])*/
-    var context = parseInt(useContext(usuarioContext)) ;
     const changeText = (text) => {
         console.log("cambiar texto");
-        context ++; 
-        usuarioContext = React.createContext(context);
-        console.log(context);
         if(buttonText == initialState) {
             setButtonText("Cancelar Suscripcion")
         } else {

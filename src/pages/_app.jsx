@@ -22,17 +22,27 @@ import "../components/carousel/CarouselDemo.css";
 
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
-import {usuarioContext} from '../contexto';
+import UserContext from '../context/UserContext';
 import React from 'react';
-
+import {useState} from 'react';
 function MyApp({ Component, pageProps }) {
+  const userI = {
+    logged: false,
+    admin: false,
+    cambiarContexto: (logged, admin) => {
+      userI.logged = logged;
+      userI.admin = admin
+    }
+  }
+  const [user, setUser] = useState(userI);
   return (
-    <usuarioContext.provider value = {usuarioContext}>
+    <UserContext.Provider value={user}>
       <>
         <Component {...pageProps} />
         <NormalizerStyled />
       </>
-    </usuarioContext.provider>
+    </UserContext.Provider>
+      
     
   );
 }
