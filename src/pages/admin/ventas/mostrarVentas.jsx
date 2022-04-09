@@ -7,7 +7,7 @@ import { Button } from "primereact/button";
 
 //NOS AYUDA A CONECTARNOS CON EL SERVIDOR DEL BACKEND
 const URI = "http://localhost:4000/api/tienda/listarVenta";
-
+const URIbackend = "http://localhost:4000/uploads/";
 const CompMostrarVentas = () => {
   const router = useRouter();
   const [ventas, setVentas] = useState([]);
@@ -66,6 +66,7 @@ const CompMostrarVentas = () => {
                 <th>Precio</th>
                 <th>Fecha</th>
                 <th>ACCIONES</th>
+                <th>Foto</th>
               </tr>
             </thead>
             <tbody>
@@ -121,6 +122,7 @@ const CompMostrarVentas = () => {
                       onClick={() => deleteVentas(venta.idVenta)}
                     />
                   </td>
+                  <td><img width="100px" height="100px" src={URIbackend+venta.foto }></img></td>
                 </tr>
               ))}
             </tbody>
