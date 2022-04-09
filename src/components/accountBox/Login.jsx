@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -27,7 +27,8 @@ import * as yup from "yup";
 import axios from "axios";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
-
+import UserContext from "../../context/UserContext";
+import UseUser from "../../hooks/UseUser";
 //Validacion de campos vacios
 const validationSchema = yup.object({
   correo: yup.string().required("Campo requerido"),
@@ -50,10 +51,12 @@ export function Singinup(props) {
   const [setSuccess] = useState(null);
   const [setError] = useState(null);
   const router = useRouter();
+  const user = UseUser();
   //controlador del formulario se activa cuando se envia el formulario
   const onSubmit = async (values) => {
     const { correo, pass } = values;
     console.log(values);
+    
     const response = await axios
       .post(
         "http://localhost:4000/api/tienda/login",
@@ -64,6 +67,9 @@ export function Singinup(props) {
         { withCredentials: true }
       )
       .then((response) => {
+        const admin = response.data.admin;console.log(user);
+        user.cambiarContexto(true, admin);
+        
         swal({
           title: "LOGIN EXITOSO",
           text: response?.data?.message,

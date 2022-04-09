@@ -22,6 +22,7 @@ const CompMostrarVentas = () => {
     //then((response) => { console.log(response) })
     if (response.data) {
       setVentas(response.data);
+      console.log(response.data);
     }
   };
 

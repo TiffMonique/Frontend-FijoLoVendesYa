@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SubmitButton } from "./Boton";
-
+import { usuarioContext } from '../../contexto';
 export const FancyButton = () => {
 
    const initialState = "Suscribirse";
     const [buttonText, setButtonText] = useState("Suscribirse");
-    
-
     // the effect
-    useEffect(() => {
+    /*useEffect(() => {
         if (buttonText !== initialState) {
-
+            setButtonText("Suscribirse")
         } 
-    }, [buttonText])
-
-    const changeText = (text) => setButtonText(text);
+    }, [buttonText])*/
+    const changeText = (text) => {
+        console.log("cambiar texto");
+        if(buttonText == initialState) {
+            setButtonText("Cancelar Suscripcion")
+        } else {
+            setButtonText("Suscribirse")
+        }
+    };
 
     return (
-        <SubmitButton type="submit" onClick={() => changeText("Cancelar Suscripcion")} >{buttonText}</SubmitButton>
+        <SubmitButton type="submit" onClick={changeText} >{buttonText}</SubmitButton>
        
     )
 

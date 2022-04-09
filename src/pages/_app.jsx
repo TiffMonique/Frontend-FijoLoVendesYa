@@ -13,6 +13,8 @@ import "swiper/css/navigation";
 import "../../src/components/SliderHome/styles.css";
 import "../../src/components/carousel/CarouselDemo.css";
 import "../../src/components/carousel/index.css";
+import "../../src/components/dataview/DataViewDemo.css";
+import "../../src/components/dataview/index.css";
 
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
@@ -22,13 +24,26 @@ import "../components/carousel/CarouselDemo.css";
 
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
-
+import UserContext from "../context/UserContext";
+import React from "react";
+import { useState } from "react";
 function MyApp({ Component, pageProps }) {
+  const userI = {
+    logged: false,
+    admin: false,
+    cambiarContexto: (logged, admin) => {
+      userI.logged = logged;
+      userI.admin = admin;
+    },
+  };
+  const [user, setUser] = useState(userI);
   return (
-    <>
-      <Component {...pageProps} />
-      <NormalizerStyled />
-    </>
+    <UserContext.Provider value={user}>
+      <>
+        <Component {...pageProps} />
+        <NormalizerStyled />
+      </>
+    </UserContext.Provider>
   );
 }
 
