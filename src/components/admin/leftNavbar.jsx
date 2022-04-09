@@ -15,7 +15,7 @@ import {
   faMessage,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "next/router";
+
 import Link from "next/link";
 
 // handleClick = async (e) => {

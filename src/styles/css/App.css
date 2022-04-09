@@ -45,6 +45,15 @@ body {
   position: relative;
 }
 
+.card-products {
+  width: 100%;
+  /* height: 450px; */
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
 .card .card-image {
   position: absolute;
   top: 0;

@@ -1,5 +1,4 @@
-import Button from "../../components/button/index";
-import NavAndFooter from "../../layouts/NavAndFooter";
+import NavAndFooter from "../../components/User/NavAndFooter";
 import ImageSlider from "../../components/Slider/Slider";
 import styled from "@emotion/styled";
 import DataViewDemo from "../../components/dataview/DataViewDemo";
@@ -13,6 +12,9 @@ const Container = styled.div`
   margin-bottom: 50px;
 `;
 
+const slider = styled.div`
+  height: 500px;
+`;
 // const Colum1 = styled.div`
 //   display: flex;
 //   flex-direction: column;
@@ -34,6 +36,7 @@ const index = () => {
         <h1 className="slider_title"></h1>
 
         <ImageSlider />
+
         <Container>
           <DataViewDemo />
         </Container>
