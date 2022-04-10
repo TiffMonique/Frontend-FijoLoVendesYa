@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SubmitButton } from "./Boton";
 import { usuarioContext } from '../../contexto';
-export const FancyButton = () => {
+export const FancyButton = (props) => {
 
    const initialState = "Suscribirse";
     const [buttonText, setButtonText] = useState("Suscribirse");
@@ -12,16 +12,19 @@ export const FancyButton = () => {
         } 
     }, [buttonText])*/
     const changeText = (text) => {
-        console.log("cambiar texto");
-        if(buttonText == initialState) {
-            setButtonText("Cancelar Suscripcion")
+        console.log("cambiar texto", props.suscrito);
+
+        if(props.suscrito) {
+            setButtonText("Cancelar Suscripcion");
+            props.setSuscripcion(false, props.nombre);
         } else {
-            setButtonText("Suscribirse")
+            setButtonText("Suscribirse");
+            props.setSuscripcion(true, props.nombre);
         }
     };
 
     return (
-        <SubmitButton type="submit" onClick={changeText} >{buttonText}</SubmitButton>
+        <SubmitButton type="submit" onClick={changeText} >{props.suscrito ? "Cancelar Suscripcion" : "Suscribirse"}</SubmitButton>
        
     )
 
