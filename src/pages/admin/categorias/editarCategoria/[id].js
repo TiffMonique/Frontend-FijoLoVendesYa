@@ -10,7 +10,7 @@ const CompActualizarCategoria = () => {
   //OBTENEMOS INFORMACION PARA PODER GESTIONAR LA ACCION
   // const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
-
+  const [foto, setFoto] = useState("");
   const router = useRouter();
   const { id: nombre } = router.query;
 
@@ -33,12 +33,12 @@ const CompActualizarCategoria = () => {
   //PROCEDIMIENTO PARA ACTUALIZAR
   const modifCateg = async (e) => {
     e.preventDefault();
+    e.preventDefault();
+    const form = document.getElementById("form");
+    const formData = new FormData(form);
     await axios.put(
       URI + nombre,
-      {
-        nombre: nombre,
-        descripcion: descripcion,
-      },
+      formData,
       {
         withCredentials: true,
       }
@@ -53,7 +53,7 @@ const CompActualizarCategoria = () => {
       <Link href="/categorias" className="btn btn-prim mt-2 mb-2">
         <i className="fa-solid fa-arrow-rotate-left"></i>
       </Link>
-      <form onSubmit={modifCateg}>
+      <form onSubmit={modifCateg} id="form">
         <div className="mb-3">
           <label className="form-label" placeholder="Ingrese el nombre">
             Nombre de la categoría
@@ -70,11 +70,23 @@ const CompActualizarCategoria = () => {
             Descripción
           </label>
           <input
+            name="descripcion"
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             type="text"
             className="form-control"
           />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Foto</label>
+          
+          <input
+            name="foto"
+            value={foto}
+            onChange={(e) => setFoto(e.target.value)}
+            type="file"
+            className="form-control"
+          ></input>
         </div>
         <button type="submit" className="btn btn-primary">
           ACTUALIZAR
