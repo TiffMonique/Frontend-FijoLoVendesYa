@@ -70,10 +70,10 @@ export class DataViewDemo extends Component {
           </div>
           <div className="product-list-action">
             <span className="product-price">L.{data.precio}</span>
+            <Button label="Agregar"></Button>
             <Button
               icon="pi pi-shopping-cart"
-              label="Ver más"
-              disabled={data.estado.toLowerCase()}
+              label="Vercccccccccc más"
             ></Button>
             <span
               className={`product-badge status-${data.estado.toLowerCase()}`}
