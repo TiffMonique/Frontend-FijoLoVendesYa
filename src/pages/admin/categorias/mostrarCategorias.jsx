@@ -11,7 +11,7 @@ const CompMostrarCategorias = () => {
   const [categ, setCateg] = useState([]);
   useEffect(() => {
     getCategorias();
-  }, []);
+  }, [categ]);
 
   //PROCEDIMIENTO PARA OBTENER LAS CATEGORIAS
   const getCategorias = async () => {
@@ -75,6 +75,7 @@ const CompMostrarCategorias = () => {
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>ACCIONES</th>
+                <th>FOTO</th>
               </tr>
             </thead>
             <tbody>
@@ -105,6 +106,7 @@ const CompMostrarCategorias = () => {
                       <Icon icon="ic:round-delete" color="#f5b921" height="3" />
                     </Button>
                   </td>
+                  <td><img height={150} src={"http://localhost:4000/uploads/"+Categorias.foto} ></img></td>
                 </tr>
               ))}
             </tbody>

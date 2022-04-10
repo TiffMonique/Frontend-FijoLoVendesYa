@@ -5,8 +5,37 @@ import "slick-carousel/slick/slick-theme.css";
 //import "./prueba.js";
 import { button } from "../button/index.jsx";
 import { FancyButton } from "./BotonP.js";
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+const URI = "http://localhost:4000/api/tienda/todasCategorias";
 function ImageSlider() {
+
+  const [categ, setCateg] = useState([]);
+  useEffect(() => {
+    getCategorias();
+  }, []);
+
+  //PROCEDIMIENTO PARA OBTENER LAS CATEGORIAS
+  const getCategorias = async () => {
+    const categorias = await axios.get(URI);
+    const suscripciones = await axios.get('http://localhost:4000/api/tienda/missuscripciones', {withCredentials:true})
+    categorias = categorias.data.map((categoria) => {
+      const suscrito = suscripciones.data.includes(categoria.nombre);
+      return {...categoria, suscrito: suscrito}
+    });
+    setCateg(categorias);
+  };
+
+  const setSuscripcion = (suscri, nombre) => {
+    console.log(suscri, nombre);console.log("Categ antes:",categ);
+    var categorias = categ.slice();
+    const indice = categorias.findIndex((categoria) => categoria.nombre == nombre);
+    categorias[indice].suscrito = suscri;
+    
+    setCateg(categorias);
+    console.log("Categ despues:",categ);
+  }
+
   let settings = {
     dots: true,
     infinite: true,
@@ -19,148 +48,29 @@ function ImageSlider() {
   };
   return (
     <Slider {...settings}>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img id="img1" src="/images/1.jpg" />
-          </div>
-          <ul className="social-icons">
-            <button />
-          </ul>
-          <div className="details">
-            <h2>
-              INMUEBLES <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img id="img2" src="/images/2.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              VEHICULOS <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/3.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              HOGAR<span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/4.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              MODA <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/5.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              FUTUROS PADRES <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/6.png" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              MASCOTAS <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/7.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              ELECTRONICA <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/8.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              SERVICIOS <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/9.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              EMPLEOS <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
-      <div className="card-wrapper">
-        <div className="card">
-          <div className="card-image">
-            <img src="images/10.jpg" />
-          </div>
-          <ul className="social-icons"></ul>
-          <div className="details">
-            <h2>
-              NEGOCIOS <span className="job-title"></span>
-            </h2>
-            <FancyButton />
-          </div>
-        </div>
-      </div>
+
+      {categ.map(
+        (categoria) => {
+          return (
+            <div className="card-wrapper">
+              <div className="card">
+                <div className="card-image">
+                  <img id="img1" src={"http://localhost:4000/uploads/"+categoria.foto} />
+                </div>
+                <ul className="social-icons">
+                  <button />
+                </ul>
+                <div className="details">
+                  <h2>
+                    {categoria.nombre} <span className="job-title"></span>
+                  </h2>
+                  <FancyButton suscrito = {categoria.suscrito} nombre= {categoria.nombre} setSuscripcion = {setSuscripcion}/>
+                </div>
+              </div>
+            </div>
+          );
+        }
+      )}
     </Slider>
   );
 }
