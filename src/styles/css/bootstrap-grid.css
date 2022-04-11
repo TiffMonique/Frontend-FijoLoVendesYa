@@ -73,6 +73,23 @@ html {
   }
 }
 
+.p-button-success {
+  top: 1%;
+  left: 9%;
+
+
+ 
+}
+.table {
+  position:relative;
+  margin:auto;
+  width:50%;
+  left:9%;
+  top: 2%;
+}
+
+
+
 .row {
   display: -ms-flexbox;
   display: flex;
