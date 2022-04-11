@@ -117,9 +117,9 @@ const CompEditarVentas = () => {
 
   return (
     <SideBar>
-      <h1>EDITAR VENTA</h1>
+      <h1 className="tituloI">EDITAR VENTA</h1>
 
-      <form onSubmit={update}>
+      <form className="ventasinsert" onSubmit={update}>
         <div className="mb-3">
           <label className="form-label">idUsuario</label>
           <input

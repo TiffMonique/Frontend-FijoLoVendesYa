@@ -113,7 +113,7 @@ function LeftNavbar() {
             />{" "}
             <a href="/">Logout</a>
             <a href="#" onClick={handleClicLogOut}>
-              Logout
+              
             </a>
           </li>
         </ul>

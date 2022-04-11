@@ -73,6 +73,43 @@ html {
   }
 }
 
+.formV {
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px;
+
+ }
+
+ 
+.tituloI{
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+}
+
+ .ventasinsert{
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  
+
+ }
+
+ .venta {
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
 .p-button-success {
   top: 1%;
   left: 9%;
