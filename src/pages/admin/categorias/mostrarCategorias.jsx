@@ -11,7 +11,7 @@ const CompMostrarCategorias = () => {
   const [categ, setCateg] = useState([]);
   useEffect(() => {
     getCategorias();
-  }, [categ]);
+  }, []);
 
   //PROCEDIMIENTO PARA OBTENER LAS CATEGORIAS
   const getCategorias = async () => {
