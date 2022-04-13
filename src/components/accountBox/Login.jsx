@@ -68,7 +68,7 @@ export function Singinup(props) {
       )
       .then((response) => {
         const admin = response.data.admin;console.log(user);
-        user.cambiarContexto(true, admin);
+        user.cambiarContexto(true, admin==true);
         
         swal({
           title: "LOGIN EXITOSO",

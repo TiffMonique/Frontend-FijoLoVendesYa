@@ -21,12 +21,12 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "../components/carousel/CarouselDemo.css";
-
+import  axios  from "axios";
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 function MyApp({ Component, pageProps }) {
   const userI = {
     logged: false,
@@ -37,6 +37,27 @@ function MyApp({ Component, pageProps }) {
     },
   };
   const [user, setUser] = useState(userI);
+
+  useEffect(async() => {
+    setUsuario();
+  }, []);
+
+  const setUsuario = async() => {
+    const response = await axios
+      .get(
+        "http://localhost:4000/api/tienda/sesion", {withCredentials:true}
+      )
+      .then((response) => {
+        const admin = response.data.admin;
+        const logged = response.data.logged;
+        console.log(user);
+        user.cambiarContexto(logged==true, admin==true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <UserContext.Provider value={user}>
       <>
