@@ -25,8 +25,11 @@ import  axios  from "axios";
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
+import {ContextSocketProvider} from "../context/ChatContext";
 import React from "react";
 import { useState, useEffect } from "react";
+
+    
 function MyApp({ Component, pageProps }) {
   const userI = {
     logged: false,
@@ -37,11 +40,11 @@ function MyApp({ Component, pageProps }) {
     },
   };
   const [user, setUser] = useState(userI);
-
   useEffect(async() => {
     setUsuario();
+    
   }, []);
-
+  
   const setUsuario = async() => {
     const response = await axios
       .get(
@@ -60,10 +63,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={user}>
-      <>
-        <Component {...pageProps} />
-        <NormalizerStyled />
-      </>
+      <ContextSocketProvider>
+        <>
+          <Component {...pageProps} />
+          <NormalizerStyled />
+        </>
+      </ContextSocketProvider>
     </UserContext.Provider>
   );
 }

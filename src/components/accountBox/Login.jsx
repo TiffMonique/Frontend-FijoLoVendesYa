@@ -28,12 +28,15 @@ import axios from "axios";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 import UserContext from "../../context/UserContext";
+import ChatContext from "../../context/ChatContext";
 import UseUser from "../../hooks/UseUser";
 //Validacion de campos vacios
 const validationSchema = yup.object({
   correo: yup.string().required("Campo requerido"),
   pass: yup.string().required("Campo requerido"),
 });
+
+
 
 const theme = createTheme();
 
@@ -52,6 +55,7 @@ export function Singinup(props) {
   const [setError] = useState(null);
   const router = useRouter();
   const user = UseUser();
+  console.log('Chat', ChatContext);
   //controlador del formulario se activa cuando se envia el formulario
   const onSubmit = async (values) => {
     const { correo, pass } = values;
