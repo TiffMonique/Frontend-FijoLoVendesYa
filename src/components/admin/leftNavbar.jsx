@@ -33,11 +33,11 @@ function LeftNavbar() {
     await axios
       .delete(
         "http://localhost:4000/api/tienda/logout",
-        {},
         { withCredentials: true }
       )
       .then((response) => {
         user.cambiarContexto(false, false);
+        console.log('cambiartexto ejecutado')
         swal({
           title: "LOGOUT EXITOSO",
           text: response?.data?.message,

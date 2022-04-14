@@ -25,10 +25,11 @@ import  axios  from "axios";
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
-import {ContextSocketProvider} from "../context/ChatContext";
+import ChatContext from "../context/ChatContext";
+import UseChat from "../hooks/UseChat";
 import React from "react";
 import { useState, useEffect } from "react";
-
+import io from 'socket.io-client';
     
 function MyApp({ Component, pageProps }) {
   const userI = {
@@ -39,12 +40,22 @@ function MyApp({ Component, pageProps }) {
       userI.admin = admin;
     },
   };
+  const chatI = {
+    socketIO: {},
+    chats: [],
+    enviarMensaje: (idChat, mensaje) => {},
+    conectar: () => {
+        ChatContext.socketIO = io('http://localhost:4000');
+    }
+  };
   const [user, setUser] = useState(userI);
+  const [chat, setChat] = useState(chatI);
   useEffect(async() => {
     setUsuario();
     
   }, []);
   
+
   const setUsuario = async() => {
     const response = await axios
       .get(
@@ -63,12 +74,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={user}>
-      <ContextSocketProvider>
+      {/* <ChatContext.Provider value={chat}> */}
         <>
           <Component {...pageProps} />
           <NormalizerStyled />
         </>
-      </ContextSocketProvider>
+      {/* </ChatContext.Provider> */}
     </UserContext.Provider>
   );
 }
