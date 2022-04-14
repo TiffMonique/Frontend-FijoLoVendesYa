@@ -73,7 +73,8 @@ export function Singinup(props) {
       .then((response) => {
         const admin = response.data.admin;console.log(user);
         user.cambiarContexto(true, admin);
-        chat.conectar;
+        chat.conectar();
+        console.log('Despues de conectar');
         swal({
           title: "LOGIN EXITOSO",
           text: response?.data?.message,

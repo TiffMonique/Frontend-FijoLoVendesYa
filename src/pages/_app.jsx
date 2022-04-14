@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
     chats: [],
     enviarMensaje: (idChat, mensaje) => {},
     conectar: () => {
-        ChatContext.socketIO = io('http://localhost:4000');
+        chatI.socketIO = io('http://localhost:4000', {withCredentials:true});
     }
   };
   const [user, setUser] = useState(userI);
@@ -74,12 +74,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={user}>
-      {/* <ChatContext.Provider value={chat}> */}
+      <ChatContext.Provider value={chat}>
         <>
           <Component {...pageProps} />
           <NormalizerStyled />
         </>
-      {/* </ChatContext.Provider> */}
+      </ChatContext.Provider>
     </UserContext.Provider>
   );
 }

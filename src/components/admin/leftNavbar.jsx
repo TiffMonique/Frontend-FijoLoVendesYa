@@ -111,9 +111,9 @@ function LeftNavbar() {
               icon={faSignOutAlt}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
-            <a href="/">Logout</a>
+            <a href="/"></a>
             <a href="#" onClick={handleClicLogOut}>
-              
+              Logout
             </a>
           </li>
         </ul>
