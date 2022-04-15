@@ -31,7 +31,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import io from 'socket.io-client';
 import { ChargingStation } from "@mui/icons-material";
-
+import { ContextSocketProvider } from "../context/context-socketio";
 function MyApp({ Component, pageProps }) {
   const userI = {
     logged: false,
@@ -86,12 +86,12 @@ function MyApp({ Component, pageProps }) {
         const logged = response.data.logged;
         console.log(user);
         user.cambiarContexto(logged==true, admin==true);
-        if(user.logged) {
+        /* if(user.logged) {
           //socket.conectar();
           console.log('conectado');
         } else {
           socket.socketIO = {};
-        }
+        } */
         
       })
       .catch((err) => {
@@ -101,14 +101,12 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={user}>
-      <ChatContext.Provider value={chat}>
-        <SocketContext.Provider value={socket}>
-          <>
-            <Component {...pageProps} />
-            <NormalizerStyled />
-          </>
-        </SocketContext.Provider>
-      </ChatContext.Provider>
+      <ContextSocketProvider>
+        <>
+          <Component {...pageProps} />
+          <NormalizerStyled />
+        </>
+      </ContextSocketProvider>
     </UserContext.Provider>
   );
 }

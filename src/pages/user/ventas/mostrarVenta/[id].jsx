@@ -1,17 +1,18 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 //import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 import NavAndFooter from "../../../../components/User/NavAndFooter";
 const URI = "http://localhost:4000/api/tienda/crearVenta/";
 import UseChat from "../../../../hooks/UseChat";
 import UseSocket from "../../../../hooks/UseSocket";
-import ChatContext from "../../../../context/ChatContext";
-const CompRegistrarVentas = () => {
+import ContextSocketProvider from "../../../../context/context-socketio";
+function CompRegistrarVentas() {
   useEffect(() => {
     buscarVenta();
   }, []);
-  const socket = UseSocket();
+  const socket = useContext(ContextSocketProvider);
+  console.log('Socket: ', socket);
   const chat = UseChat();
   const router = useRouter();
   const buscarVenta = async (e) => {
@@ -90,7 +91,7 @@ const CompRegistrarVentas = () => {
         </button>
         
       </form>
-      <div>
+      {/* <div>
           <ul>
             {
               chat.map((mensaje, indice) => {
@@ -101,7 +102,7 @@ const CompRegistrarVentas = () => {
             }
           </ul>
           
-        </div>
+        </div> */}
     </NavAndFooter>
   );
 };
