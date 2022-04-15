@@ -1,14 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import io from 'socket.io-client';
 //let socket = 
-const ChatContext = createContext({
-    socketIO: {},
-    chats: [],
-    enviarMensaje: (idChat, mensaje) => {},
-    conectar: () => {
-        ChatContext.socketIO = io('http://localhost:4000');
-    }
-})
+const ChatContext = createContext([]);
 
 
 export default ChatContext;

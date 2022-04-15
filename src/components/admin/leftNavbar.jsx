@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import axios from "axios";
 import UseUser from "../../hooks/UseUser";
-
+import UseChat from "../../hooks/UseChat";
+import UseSocket from "../../hooks/UseSocket";
 import {
   faBookOpen,
   faCog,
@@ -29,6 +30,7 @@ import Link from "next/link";
 function LeftNavbar() {
   const router = useRouter();
   const user = UseUser();
+  const socket = UseSocket();
   const handleClicLogOut = async () => {
     await axios
       .delete(
@@ -37,6 +39,7 @@ function LeftNavbar() {
       )
       .then((response) => {
         user.cambiarContexto(false, false);
+        socket.socketIO.disconnect();
         console.log('cambiartexto ejecutado')
         swal({
           title: "LOGOUT EXITOSO",
@@ -51,7 +54,7 @@ function LeftNavbar() {
         console.log(err);
         swal({
           title: "HA OCURRIDO UN ERROR",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           button: "Aceptar",
           timer: "1500",

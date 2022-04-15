@@ -29,7 +29,7 @@ import swal from "sweetalert";
 import { useRouter } from "next/router";
 import UserContext from "../../context/UserContext";
 import UseUser from "../../hooks/UseUser";
-import UseChat from "../../hooks/UseChat";
+import UseSocket from "../../hooks/UseSocket";
 //Validacion de campos vacios
 const validationSchema = yup.object({
   correo: yup.string().required("Campo requerido"),
@@ -53,8 +53,7 @@ export function Singinup(props) {
   const [setError] = useState(null);
   const router = useRouter();
   const user = UseUser();
-  const chat = UseChat();
-  console.log('chat. ', chat);
+  const socket = UseSocket();
   
   //controlador del formulario se activa cuando se envia el formulario
   const onSubmit = async (values) => {
@@ -73,7 +72,7 @@ export function Singinup(props) {
       .then((response) => {
         const admin = response.data.admin;console.log(user);
         user.cambiarContexto(true, admin);
-        chat.conectar();
+        //socket.conectar();
         console.log('Despues de conectar');
         swal({
           title: "LOGIN EXITOSO",

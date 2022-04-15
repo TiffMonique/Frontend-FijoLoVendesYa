@@ -26,10 +26,11 @@ import  axios  from "axios";
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
 import ChatContext from "../context/ChatContext";
-import UseChat from "../hooks/UseChat";
+import SocketContext from "../context/SocketContext";
 import React from "react";
 import { useState, useEffect } from "react";
 import io from 'socket.io-client';
+import { ChargingStation } from "@mui/icons-material";
     
 function MyApp({ Component, pageProps }) {
   const userI = {
@@ -40,16 +41,35 @@ function MyApp({ Component, pageProps }) {
       userI.admin = admin;
     },
   };
-  const chatI = {
-    socketIO: {},
-    chats: [],
-    enviarMensaje: (idChat, mensaje) => {},
-    conectar: () => {
-        chatI.socketIO = io('http://localhost:4000', {withCredentials:true});
-    }
-  };
   const [user, setUser] = useState(userI);
-  const [chat, setChat] = useState(chatI);
+  const [chat, setChat] = useState([]);
+  
+  const socketI = {
+    socketIO: io('http://localhost:4000', {withCredentials:true}),
+    /* conectar: () => {
+        const socket =;
+        socket.on('pruebaregreso', async(msg) => {
+          console.log('chats', chat);
+          setChat(['msg']);
+        })
+        socketI.socketIO =  socket;
+    } */
+  };
+  socketI.socketIO.on('pruebaregreso', async(msg) => {
+    console.log('chats', chat);
+    const chat2 = chat.slice();
+    chat2.push(msg);
+    setChat(chat2);
+  })
+  const [socket, setSocket] = useState(socketI);
+  /*socketI.socketIO.on('pruebaregreso', (msg) => {
+    console.log(msg);
+    const chats = chat.slice();
+    chats.push(msg);
+    setChat(chats);
+  })*/
+
+  
   useEffect(async() => {
     setUsuario();
     
@@ -66,6 +86,13 @@ function MyApp({ Component, pageProps }) {
         const logged = response.data.logged;
         console.log(user);
         user.cambiarContexto(logged==true, admin==true);
+        if(user.logged) {
+          //socket.conectar();
+          console.log('conectado');
+        } else {
+          socket.socketIO = {};
+        }
+        
       })
       .catch((err) => {
         console.log(err);
@@ -75,10 +102,12 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserContext.Provider value={user}>
       <ChatContext.Provider value={chat}>
-        <>
-          <Component {...pageProps} />
-          <NormalizerStyled />
-        </>
+        <SocketContext.Provider value={socket}>
+          <>
+            <Component {...pageProps} />
+            <NormalizerStyled />
+          </>
+        </SocketContext.Provider>
       </ChatContext.Provider>
     </UserContext.Provider>
   );

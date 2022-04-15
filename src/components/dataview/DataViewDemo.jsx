@@ -64,17 +64,20 @@ export class DataViewDemo extends Component {
           <div className="product-list-detail">
             <div className="product-name">{data.producto}</div>
             {/* <div className="product-description">{data.descripcion}</div> */}
-            <Rating value={data.rating} readOnly cancel={false}></Rating>
+            <Rating value={data.calificacion} readOnly cancel={false}></Rating>
             <i className="pi pi-tag product-category-icon"></i>
             <span className="product-category">{data.categoria}</span>
           </div>
           <div className="product-list-action">
             <span className="product-price">L.{data.precio}</span>
+            <a >
             <Button
               icon="pi pi-shopping-cart"
               label="Ver más"
               disabled={data.estado.toLowerCase()}
             ></Button>
+            </a>
+            
             <span
               className={`product-badge status-${data.estado.toLowerCase()}`}
             >
@@ -102,7 +105,8 @@ export class DataViewDemo extends Component {
             </span>
           </div>
           <div className="product-grid-item-content  imagenes">
-            <img
+            <a href={"/user/ventas/mostrarVenta/"+data.idVenta}>
+              <img
               src={`http://localhost:4000/uploads/${data.foto}`}
               onError={(e) =>
                 (e.target.src =
@@ -110,6 +114,8 @@ export class DataViewDemo extends Component {
               }
               alt={data.nombre}
             />
+            </a>
+            
             <div className="product-name">{data.producto}</div>
             <div className="product-description"></div>
             <Rating value={data.calificacion} cancel={false}></Rating>
