@@ -31,7 +31,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import io from 'socket.io-client';
 import { ChargingStation } from "@mui/icons-material";
-    
+
 function MyApp({ Component, pageProps }) {
   const userI = {
     logged: false,
