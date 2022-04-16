@@ -19,19 +19,23 @@ function ImageSlider() {
   const getCategorias = async () => {
     const categorias = await axios.get(URI);
     const suscripciones = await axios.get('http://localhost:4000/api/tienda/missuscripciones', {withCredentials:true})
-    categorias = categorias.data.map((categoria) => {
+    const categoriasM = categorias.data.map((categoria) => {
       const suscrito = suscripciones.data.includes(categoria.nombre);
       return {...categoria, suscrito: suscrito}
     });
-    setCateg(categorias);
+    setCateg(categoriasM);
   };
 
-  const setSuscripcion = (suscri, nombre) => {
+  const setSuscripcion = async (suscri, nombre) => {
     console.log(suscri, nombre);console.log("Categ antes:",categ);
     var categorias = categ.slice();
     const indice = categorias.findIndex((categoria) => categoria.nombre == nombre);
     categorias[indice].suscrito = suscri;
-    
+    if (suscri) {
+      await axios.post('http://localhost:4000/api/tienda/suscribirse', {categoria: nombre}, {withCredentials:true})
+    } else {
+      await axios.delete('http://localhost:4000/api/tienda/desuscribirse/'+nombre, {withCredentials:true})
+    }
     setCateg(categorias);
     console.log("Categ despues:",categ);
   }
@@ -52,7 +56,7 @@ function ImageSlider() {
       {categ.map(
         (categoria) => {
           return (
-            <div className="card-wrapper">
+            <div className="card-wrapper" key={categoria.nombre}>
               <div className="card">
                 <div className="card-image">
                   <img id="img1" src={"http://localhost:4000/uploads/"+categoria.foto} />

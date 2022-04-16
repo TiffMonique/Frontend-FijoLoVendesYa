@@ -77,9 +77,9 @@ const CompRegistrarVentas = () => {
 
   return (
     <SideBar>
-      <h1>CREAR VENTA</h1>
+      <h1 className="venta">CREAR VENTA</h1>
 
-      <form onSubmit={store} id="form">
+      <form className="formV" onSubmit={store} id="form">
         <div className="mb-3">
           <label className="form-label">Estado</label>
           <br></br>
