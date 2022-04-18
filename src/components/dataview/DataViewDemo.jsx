@@ -4,6 +4,8 @@ import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { ProductService } from "../../service/ProductService";
 import { Rating } from "primereact/rating";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export class DataViewDemo extends Component {
   constructor(props) {
@@ -71,10 +73,22 @@ export class DataViewDemo extends Component {
           <div className="product-list-action">
             <span className="product-price">L.{data.precio}</span>
             <Button label="Agregar"></Button>
-            <Button
-              icon="pi pi-shopping-cart"
-              label="Vercccccccccc más"
-            ></Button>
+            <a href={"/product/" + data.idVenta}>
+              <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
+            </a>
+            <Link
+              href={{
+                pathname: "/complaint/",
+                query: { idVenta: data.idVenta },
+              }}
+              className="btn btn-prim mt-2 mb-2"
+            >
+              <Button
+                label="Denunciar"
+                icon="pi pi-plus"
+                className="p-button-success mr-2"
+              />
+            </Link>
             <span
               className={`product-badge status-${data.estado.toLowerCase()}`}
             >
@@ -116,7 +130,22 @@ export class DataViewDemo extends Component {
           </div>
           <div className="product-grid-item-bottom">
             <span className="product-price">L. {data.precio}</span>
-            <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
+            <a href={"/product/" + data.idVenta}>
+              <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
+            </a>
+            <Link
+              href={{
+                pathname: "/complaint/",
+                query: { idVenta: data.idVenta },
+              }}
+              className="btn btn-prim mt-2 mb-2"
+            >
+              <Button
+                label="Denunciar"
+                icon="pi pi-plus"
+                className="p-button-success mr-2"
+              />
+            </Link>
           </div>
         </div>
       </div>

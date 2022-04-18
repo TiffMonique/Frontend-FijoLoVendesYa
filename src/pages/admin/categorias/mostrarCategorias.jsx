@@ -20,37 +20,30 @@ const CompMostrarCategorias = () => {
   };
 
   //PROCEDIMIENTO PARA ELIMINAR
-  const deleteCategorias = async (nombre) => {
-    const response = await axios
-      .delete(`http://localhost:4000/api/tienda/eliminarCategoria/${nombre}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        getCategorias();
-        swal({
-          title: "BORRO EXITOSO",
-          text: response?.data?.message,
-          icon: "success",
-          button: "Aceptar",
-          timer: "1500",
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        swal({
-          title: "HA OCURRIDO UN ERROR",
-          text: err.response.data.message,
-          icon: "error",
-          button: "Aceptar",
-          timer: "1500",
-        });
-      });
-
-    if (response && response.data) {
-      console.log("Hola");
-      setError(null);
-      setSuccess(response?.data?.message);
-    }
+  const deleteCategoria = async (nombre) => {
+    await axios.delete(
+      `http://localhost:4000/api/tienda/eliminarCategoria/${nombre}`,
+      { withCredentials: true }
+    );
+    await getCategorias();
+  };
+  const confirmDeleteCategory = (nombre) => {
+    swal({
+      title: "¿Está seguro?",
+      text: "Se eliminarán todas las ventas asociadas a esa categoría!",
+      icon: "warning",
+      buttons: true,
+      warningMode: true,
+    }).then((result) => {
+      if (result) {
+        deleteCategoria(nombre);
+        swal(
+          "Borrado completado!",
+          "La categoría se eliminó correctamente",
+          "success"
+        );
+      }
+    });
   };
 
   //VISTA DE USUARIOS TABLA CON LAS CATEGORIAS
@@ -101,7 +94,7 @@ const CompMostrarCategorias = () => {
                       label="Borrar"
                       icon="pi pi-trash"
                       className="p-button-danger"
-                      onClick={() => deleteCategorias(Categorias.nombre)}
+                      onClick={() => confirmDeleteCategory(Categorias.nombre)}
                     >
                       <Icon icon="ic:round-delete" color="#f5b921" height="3" />
                     </Button>

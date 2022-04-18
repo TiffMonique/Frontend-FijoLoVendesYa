@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/router";
 import { Button } from "primereact/button";
+import swal from "sweetalert";
 
 //NOS AYUDA A CONECTARNOS CON EL SERVIDOR DEL BACKEND
 const URI = "http://localhost:4000/api/tienda/listarVenta";
@@ -34,6 +35,20 @@ const CompMostrarVentas = () => {
       }
     );
     await getVentas();
+  };
+  const confirmDelete = (idVenta) => {
+    swal({
+      title: "¿Está seguro?",
+      text: "Los cambios son irreversibles",
+      icon: "warning",
+      buttons: true,
+      warningMode: true,
+    }).then((result) => {
+      if (result) {
+        deleteVentas(idVenta);
+        swal("Borrado Completo!", "Se eliminó la venta.", "success");
+      }
+    });
   };
 
   //console.log(ventas);
@@ -119,10 +134,16 @@ const CompMostrarVentas = () => {
                       label="Borrar"
                       icon="pi pi-trash"
                       className="p-button-danger"
-                      onClick={() => deleteVentas(venta.idVenta)}
+                      onClick={() => confirmDelete(venta.idVenta)}
                     />
                   </td>
-                  <td><img width="100px" height="100px" src={URIbackend+venta.foto }></img></td>
+                  <td>
+                    <img
+                      width="100px"
+                      height="100px"
+                      src={URIbackend + venta.foto}
+                    ></img>
+                  </td>
                 </tr>
               ))}
             </tbody>

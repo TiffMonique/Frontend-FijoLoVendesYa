@@ -94,6 +94,15 @@ function LeftNavbar() {
           </li>
           <li>
             <FontAwesomeIcon
+              icon={faBookOpen}
+              style={{ width: "18px", cursor: "pointer" }}
+            />{" "}
+            <Link href="/admin/denuncias">
+              <a>Denuncias</a>
+            </Link>
+          </li>
+          <li>
+            <FontAwesomeIcon
               icon={faMessage}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}

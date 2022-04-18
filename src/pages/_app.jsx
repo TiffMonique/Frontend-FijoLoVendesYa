@@ -10,6 +10,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+// Import Swiper styles
+
+import "swiper/css/free-mode";
+
+import "swiper/css/thumbs";
+
 import "../../src/components/SliderHome/styles.css";
 import "../../src/components/carousel/CarouselDemo.css";
 import "../../src/components/carousel/index.css";
@@ -21,6 +28,9 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "../components/carousel/CarouselDemo.css";
+
+import "../components/product/ProductDetails.css";
+import "../components/product/styles.css";
 
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";

@@ -44,9 +44,11 @@ export function Complaint(props) {
   const router = useRouter();
 
   const onSubmit = (values) => {
-    const { motivo,contenido } = values;
+    const link = window.location.href;
+    const split = link.split("=");
+    const { motivo,contenido,idVenta} = values;
+    idVenta = split[1];
     console.log(values);
-
     swal({
       title: "¿Seguro que desea realizar la denuncia?",
       icon: "info",
@@ -59,7 +61,8 @@ export function Complaint(props) {
             "http://localhost:4000/api/tienda/creardenuncia",
             {
               contenido: contenido,
-              motivo:motivo
+              motivo:motivo,
+              idVenta:idVenta
             },
             {
               withCredentials: true,
@@ -81,7 +84,7 @@ export function Complaint(props) {
             console.log(error);
             swal({
               title: "HA OCURRIDO UN ERROR",
-              text: err.response.data.message,
+              text: error.response.data.message,
               icon: "error",
               button: "Aceptar",
               timer: "1500",
