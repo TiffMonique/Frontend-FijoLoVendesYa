@@ -25,43 +25,45 @@ import  axios  from "axios";
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
-import ChatContext from "../context/ChatContext";
-import SocketContext from "../context/SocketContext";
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import io from 'socket.io-client';
 import { ChargingStation } from "@mui/icons-material";
 import { ContextSocketProvider } from "../context/context-socketio";
+import ContextSocket from "../context/context-socketio";
+import { ContextChatProvider } from "../context/ChatContext";
 function MyApp({ Component, pageProps }) {
   const userI = {
     logged: false,
     admin: false,
-    cambiarContexto: (logged, admin) => {
+    cambiarContexto: (logged, admin, idSesion) => {
       userI.logged = logged;
       userI.admin = admin;
+      userI.idSesion = idSesion
     },
   };
   const [user, setUser] = useState(userI);
   const [chat, setChat] = useState([]);
-  
+  var {conectar} = useContext(ContextSocket);
+  /*
   const socketI = {
     socketIO: io('http://localhost:4000', {withCredentials:true}),
-    /* conectar: () => {
+     conectar: () => {
         const socket =;
         socket.on('pruebaregreso', async(msg) => {
           console.log('chats', chat);
           setChat(['msg']);
         })
         socketI.socketIO =  socket;
-    } */
-  };
-  socketI.socketIO.on('pruebaregreso', async(msg) => {
+    } 
+  };*/
+  /*socketI.socketIO.on('pruebaregreso', async(msg) => {
     console.log('chats', chat);
     const chat2 = chat.slice();
     chat2.push(msg);
     setChat(chat2);
-  })
-  const [socket, setSocket] = useState(socketI);
+  })*/
+  //const [socket, setSocket] = useState(socketI);
   /*socketI.socketIO.on('pruebaregreso', (msg) => {
     console.log(msg);
     const chats = chat.slice();
@@ -84,15 +86,8 @@ function MyApp({ Component, pageProps }) {
       .then((response) => {
         const admin = response.data.admin;
         const logged = response.data.logged;
-        console.log(user);
-        user.cambiarContexto(logged==true, admin==true);
-        /* if(user.logged) {
-          //socket.conectar();
-          console.log('conectado');
-        } else {
-          socket.socketIO = {};
-        } */
-        
+        const idSession = response.data.idSesion
+        setUser({logged:logged==true, admin: admin==true, idSession})
       })
       .catch((err) => {
         console.log(err);
@@ -101,12 +96,14 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <UserContext.Provider value={user}>
-      <ContextSocketProvider>
-        <>
-          <Component {...pageProps} />
-          <NormalizerStyled />
-        </>
-      </ContextSocketProvider>
+      <ContextChatProvider>
+        <ContextSocketProvider>
+          <>
+            <Component {...pageProps} />
+            <NormalizerStyled />
+          </>
+        </ContextSocketProvider>
+      </ContextChatProvider>
     </UserContext.Provider>
   );
 }

@@ -1,19 +1,17 @@
-import { createContext, useState, useEffect } from 'react';
-import io from 'socket.io-client';
-//let socket = 
-const ChatContext = createContext([]);
+import { createContext, useState, } from 'react';
+const Context = createContext({});
 
-
-export default ChatContext;
-/*export function ContextSocketProvider({children}) {
-    const [Socket, setSocket] = useState(null);
-    useEffect(() => {
-        const SOCKET_URI = 'ws://localhost:4000';
-        const socket = client(SOCKET_URI)
-        setSocket(socket);
-    }, []);
-    
-    return <Context.Provider value={Socket}>
+export function ContextChatProvider({children}){
+    let [chats, setChats] = useState([])
+    const concatenar = (msg)=> {
+        console.log('concatenar', msg);
+        const a = chats.slice();
+        a.concat("a");
+        setChats(a);
+    }
+    return <Context.Provider value={{chats, setChats, concatenar}}>
         {children}
     </Context.Provider>
-}*/
+}
+
+export default Context;

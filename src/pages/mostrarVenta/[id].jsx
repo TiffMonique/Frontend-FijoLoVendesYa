@@ -2,18 +2,20 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 //import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
-import NavAndFooter from "../../../../components/User/NavAndFooter";
+import NavAndFooter from "../../components/User/NavAndFooter";
 const URI = "http://localhost:4000/api/tienda/crearVenta/";
-import UseChat from "../../../../hooks/UseChat";
-import ContextSocket from "../../../../context/context-socketio";
-import ContextChat from "../../../../context/ChatContext";
+import UseChat from "../../hooks/UseChat";
+import ContextSocket from "../../context/context-socketio";
+import ContextChat from "../../context/ChatContext";
+import UseUser from "../../hooks/UseUser";
 function CompRegistrarVentas() {
   useEffect(() => {
     buscarVenta();
   }, []);
   const {chats, setChats, } = useContext(ContextChat);
   const {Socket, conectar, desconectar} = useContext(ContextSocket);
-  
+  const user = UseUser();
+  console.log('user state', user);
   const buscarVenta = async (e) => {
     const location = window.location.href.split('/');
     const id = location[location.length-1];
@@ -29,6 +31,25 @@ function CompRegistrarVentas() {
     setFechaPublicacion(data.fechaPublicacion);
     setFotos(data.fotos);
   };
+
+  useEffect(() => {
+    if (user.logged) {
+      if (Socket) {
+        console.log('user');
+        console.log('si socket')
+        const handler = (msg) => {
+          setChats([...chats, msg])
+        }
+        Socket.on("pruebaregreso", handler)
+        return () => { 
+          Socket.off("pruebaregreso", handler)
+        }; 
+      } else {
+        conectar()
+      }
+    }
+    
+  }, [chats, Socket, user]);
 
   const pruebaSocketmsg = async() => {
     console.log("Pruebasocket");
@@ -61,7 +82,7 @@ function CompRegistrarVentas() {
 
   return (
     <NavAndFooter>
-      <h1>hola</h1>
+      
       <form  id="form" className="insertarVentas">
         <h1 className="centrarTitulo">{producto}</h1>
         <div className="mb-3">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from "../../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -6,6 +6,7 @@ import axios from "axios";
 import UseUser from "../../hooks/UseUser";
 import UseChat from "../../hooks/UseChat";
 import UseSocket from "../../hooks/UseSocket";
+import SocketContext from "../../context/context-socketio";
 import {
   faBookOpen,
   faCog,
@@ -30,7 +31,7 @@ import Link from "next/link";
 function LeftNavbar() {
   const router = useRouter();
   const user = UseUser();
-  const socket = UseSocket();
+  const {setSocket, Socket} = useContext(SocketContext);;
   const handleClicLogOut = async () => {
     await axios
       .delete(
@@ -39,7 +40,7 @@ function LeftNavbar() {
       )
       .then((response) => {
         user.cambiarContexto(false, false);
-        socket.socketIO.disconnect();
+        Socket.disconnect();
         console.log('cambiartexto ejecutado')
         swal({
           title: "LOGOUT EXITOSO",
