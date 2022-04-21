@@ -17,10 +17,14 @@ const chat = () => {
                     width="50"
                     className="rounded-circle"
                   />
+                  <div class="col-sm-8 col-xs-7 heading-name">
+                    <a class="heading-name-meta">John Doe</a>
+                    <span class="heading-online">Online</span>
+                  </div>
                 </div>
                 <div className="col-sm-1 col-xs-1  heading-dot  pull-right">
                   <i
-                    class="fa fa-ellipsis-v fa-2x  pull-right"
+                    className="fa fa-ellipsis-v fa-2x  pull-right"
                     aria-hidden="true"
                   ></i>
                 </div>
@@ -31,7 +35,20 @@ const chat = () => {
                   ></i>
                 </div>
               </div>
-
+              <div class="row searchBox">
+                <div class="col-sm-12 searchBox-inner">
+                  <div class="form-group has-feedback">
+                    <input
+                      id="searchText"
+                      type="text"
+                      class="form-control"
+                      name="searchText"
+                      placeholder="Search"
+                    />
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </div>
+                </div>
+              </div>
               <div className="messages-box">
                 <div className="list-group rounded-0">
                   <a className="list-group-item list-group-item-action active text-white rounded-0">
@@ -245,16 +262,20 @@ const chat = () => {
 
           <div className="col-7 px-0">
             <div className="bg-gray px-4 py-2 bg-light hola">
-              <div className="icons">
-                <div className="col-sm-3 col-xs-3 heading-avatar">
-                  <img
-                    src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
-                    alt="user"
-                    width="50"
-                    className="rounded-circle"
-                  />
+              <div className="col-sm-3 col-xs-3 heading-avatar">
+                <img
+                  src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                  alt="user"
+                  width="50"
+                  className="rounded-circle"
+                />
+                <div class="col-sm-8 col-xs-7 heading-name">
+                  <a class="heading-name-meta">John Doe</a>
+                  <span class="heading-online">Online</span>
                 </div>
+              </div>
 
+              <div className="icons">
                 <div className="col-lg-6 hidden-sm text-right">
                   <a
                     href="javascript:void(0);"
