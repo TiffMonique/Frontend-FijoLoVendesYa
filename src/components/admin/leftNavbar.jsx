@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from "../../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import axios from "axios";
 import UseUser from "../../hooks/UseUser";
-
+import UseChat from "../../hooks/UseChat";
+import UseSocket from "../../hooks/UseSocket";
+import SocketContext from "../../context/context-socketio";
+import UserContext from "../../context/UserContext";
 import {
   faBookOpen,
   faCog,
@@ -28,16 +31,21 @@ import Link from "next/link";
 
 function LeftNavbar() {
   const router = useRouter();
-  const user = UseUser();
+  const user = useContext(UserContext);
+  const {setSocket, Socket} = useContext(SocketContext);;
   const handleClicLogOut = async () => {
     await axios
       .delete(
         "http://localhost:4000/api/tienda/logout",
-        {},
         { withCredentials: true }
       )
       .then((response) => {
-        user.cambiarContexto(false, false);
+        user.setlogged(false);
+        user.setadmin(false);
+        user.setidSesion(null)
+        if(Socket) {
+          Socket.disconnect();
+        }
         swal({
           title: "LOGOUT EXITOSO",
           text: response?.data?.message,
@@ -51,7 +59,7 @@ function LeftNavbar() {
         console.log(err);
         swal({
           title: "HA OCURRIDO UN ERROR",
-          text: err.response.data.message,
+          text: err.message,
           icon: "error",
           button: "Aceptar",
           timer: "1500",
@@ -120,9 +128,9 @@ function LeftNavbar() {
               icon={faSignOutAlt}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
-            <a href="/">Logout</a>
+            <a href="/"></a>
             <a href="#" onClick={handleClicLogOut}>
-              
+              Logout
             </a>
           </li>
         </ul>
