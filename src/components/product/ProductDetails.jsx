@@ -219,39 +219,6 @@ const ProductDetails = (data) => {
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
-                        {/* <div className="modal-body">
-                        <ul className="stars">
-                          <li className="star">
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li className="star">
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li className="star">
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li className="star">
-                            <i className="fa fa-star"></i>
-                          </li>
-                          <li className="star">
-                            <i className="fa fa-star"></i>
-                          </li>
-                        </ul>
-
-                        <textarea
-                          name="review"
-                          id="review"
-                          className="form-control mt-3"
-                        ></textarea>
-
-                        <button
-                          className="btn my-3 float-right review-btn px-4 text-white"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          Submit
-                        </button>
-                      </div> */}
                       </div>
                     </div>
                   </div>

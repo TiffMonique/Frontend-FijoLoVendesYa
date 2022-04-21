@@ -31,7 +31,7 @@ import "../components/carousel/CarouselDemo.css";
 
 import "../components/product/ProductDetails.css";
 import "../components/product/styles.css";
-
+import "../components/chat/chat.css";
 //importacion de panelMenu
 import "../components/PanelMenu/panelMenu.css";
 import UserContext from "../context/UserContext";
