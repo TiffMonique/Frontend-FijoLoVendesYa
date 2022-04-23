@@ -101,6 +101,7 @@ export function SignupForm(props) {
             telefono: telefono,
             pass: pass,
             direccion: direccion,
+            departamento: departamento
           })
           .then((response) => {
             {
@@ -157,6 +158,7 @@ export function SignupForm(props) {
   });
 
   const theme = createTheme();
+  const [departamento, setDepartamento] = useState('');
 
   return (
     <ThemeProvider theme={theme} onSubmit={formik.handleSubmit}>
@@ -271,6 +273,44 @@ export function SignupForm(props) {
                 ? formik.errors.direccion
                 : ""}
             </FieldError>
+
+            <div className="departamentos">
+              <label className="form-label"></label>
+
+              <select
+                className="form-control"
+                
+                value={departamento}
+                onChange={(e) => {
+                  setDepartamento(e.target.value);
+               
+                }}
+
+              >
+                <option>Elige un Depto</option>
+                <option>Yoro</option>
+                <option>El Paraiso</option>
+                <option>Fco Morazan</option>
+                <option>La paz</option>
+                <option>Choluteca</option>
+                <option>Valle</option>
+                <option>Ocotepeque</option>
+                <option>Olancho</option>
+                <option>Santa Barbara</option>
+                <option>Atlantida</option>
+                <option>Cortes</option>
+                <option>Lempira</option>
+                <option>Is Bahia</option>
+                <option>Gracias</option>
+                <option>Colon</option>
+                <option>Comayagua</option>
+                <option>Copan</option>
+                <option>Intibuca</option>
+
+              </select>
+
+            </div>
+
             <TextField
               margin="normal"
               required
