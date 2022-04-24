@@ -51,26 +51,6 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          {/* <div className="loginButtons">
-            <Button
-              as="a"
-              width="120px"
-              onClick={() => {
-                router.push("/#");
-              }}
-            >
-              Publicar Anuncio
-            </Button>
-            <Button
-              as="a"
-              width="120px"
-              onClick={() => {
-                router.push("/#");
-              }}
-            >
-              Publicar Producto
-            </Button>
-          </div> */}
         </div>
       </div>
     </StyledNavbarContainer>

@@ -1,7 +1,7 @@
 import NavAndFooter from "../../components/User/NavAndFooter";
 import ImageSlider from "../../components/Slider/Slider";
 import styled from "@emotion/styled";
-import DataViewDemo from "../../components/dataviewCopy/DataViewDemo"
+import DataViewDemo from "../../components/dataview/DataViewDemo";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const Container = styled.div`
@@ -31,12 +31,8 @@ const slider = styled.div`
 // `;
 
 const index = () => {
-
- 
-
-
   return (
-    <NavAndFooter >
+    <NavAndFooter>
       <div className="container mt-5 carousel">
         <h1 className="slider_title"></h1>
         <Container>

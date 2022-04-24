@@ -87,6 +87,7 @@ const CompRegistrarVentas = () => {
             name="estado"
             className="form-select"
             onChange={(e) => setEstado(e.target.value)}
+            required
           >
             <option value="Disponible">Disponible</option>
             <option value="No Disponible">No Disponible</option>
@@ -102,6 +103,7 @@ const CompRegistrarVentas = () => {
             onChange={(e) => setProducto(e.target.value)}
             type="text"
             className="form-control"
+            required
           ></input>
         </div>
         <div className="mb-3">
@@ -112,6 +114,7 @@ const CompRegistrarVentas = () => {
             onChange={(e) => setCantidad(e.target.value)}
             type="number"
             className="form-control"
+            required
           ></input>
         </div>
         <div className="mb-3">
@@ -122,6 +125,7 @@ const CompRegistrarVentas = () => {
             onChange={(e) => setDescripcion(e.target.value)}
             type="text"
             className="form-control"
+            required
           ></input>
         </div>
         <div className="mb-3">
@@ -134,6 +138,7 @@ const CompRegistrarVentas = () => {
             onChange={(e) => {
               setCategoria(e.target.value);
             }}
+            required
           >
             {categorias.map((elemento) => (
               <option key={elemento.nombre} value={elemento.nombre}>
@@ -150,18 +155,10 @@ const CompRegistrarVentas = () => {
             onChange={(e) => setPrecio(e.target.value)}
             type="number"
             className="form-control"
+            required //Para que no se pueda dejar vacio
           ></input>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Fecha</label>
-          <input
-            name="fechaPublicacion"
-            value={fechaPublicacion}
-            onChange={(e) => setFechaPublicacion(e.target.value)}
-            type="date"
-            className="form-control"
-          ></input>
-        </div>
+
         <div className="mb-3">
           <label className="form-label">Foto</label>
           <input
@@ -171,6 +168,7 @@ const CompRegistrarVentas = () => {
             type="file"
             multiple
             className="form-control"
+            required
           ></input>
         </div>
         <button type="submit" className="btn btn-primary">

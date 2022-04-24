@@ -43,6 +43,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  margin: 2rem 2rem ;
 }
 
 .card-products {
@@ -52,6 +53,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   position: relative;
+
 }
 
 .card .card-image {
@@ -77,11 +79,12 @@ body {
   opacity: 0.4;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+
 }
 
 .card:hover .card-image {
-  -webkit-transform: translateY(-100px);
-  transform: translateY(-100px);
+  -webkit-transform: translateY(-1100px);
+  transform: translateY(-120px);
   -webkit-transition: all 0.9s;
   transition: all 0.9s;
 }
