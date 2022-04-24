@@ -4,7 +4,7 @@ import ImageSliderHome from "../components/SliderHome/Slider";
 import CarouselDemo from "../components/carousel/CarouselDemo";
 import PanelMenu from "../components/PanelMenu/PanelMenu";
 import Banner from "../components/banner/bannerHome";
-
+import DataViewDemo from "../components/dataview/DataViewDemo";
 //import Slider from "react-slick";
 import styled from "@emotion/styled";
 
@@ -54,6 +54,9 @@ const index = () => {
         <Colum2>
           <PanelMenu />
         </Colum2>
+      </Container>
+      <Container>
+        <DataViewDemo />
       </Container>
       <Container>
         <Banner />

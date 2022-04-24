@@ -1,9 +1,8 @@
 import NavAndFooter from "../../components/User/NavAndFooter";
 import ImageSlider from "../../components/Slider/Slider";
 import styled from "@emotion/styled";
-import DataViewDemo from "../../components/dataview/DataViewDemo";
+import DataViewDemo from "../../components/dataviewCopy/DataViewDemo"
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useRouter } from "next/router";
 
 const Container = styled.div`
   max-width: 1440px;
@@ -32,15 +31,14 @@ const slider = styled.div`
 // `;
 
 const index = () => {
+
  
+
 
   return (
     <NavAndFooter >
       <div className="container mt-5 carousel">
         <h1 className="slider_title"></h1>
-
-        <ImageSlider />
-
         <Container>
           <DataViewDemo />
         </Container>

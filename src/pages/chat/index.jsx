@@ -1,15 +1,8 @@
 import Chat from "../../components/chat/chat";
-import Navbar from "../../components/chat/Navbar";
+// import Navbar from "../../components/chat/Navbar";
 
 const index = () => {
-  return (
-    <div>
-      <Navbar />
-      <div>
-        <Chat />
-      </div>
-    </div>
-  );
+  return <Chat />;
 };
 
 export default index;
