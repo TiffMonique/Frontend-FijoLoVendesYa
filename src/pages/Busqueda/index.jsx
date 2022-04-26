@@ -1,7 +1,7 @@
 import NavAndFooter from "../../components/User/NavAndFooter";
 import ImageSlider from "../../components/Slider/Slider";
 import styled from "@emotion/styled";
-import DataViewDemo from "../../components/dataview/DataViewDemo";
+import DataViewDemo from "../../components/dataviewCopy/DataViewDemo";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const Container = styled.div`
