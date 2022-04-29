@@ -5,8 +5,8 @@
 }
 
 .dataview-demo .product-name {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .dataview-demo .product-description {
@@ -61,7 +61,7 @@
 }
 
 .dataview-demo .product-grid-item {
-    margin: .5em;
+    margin: .5em ;
     border: 1px solid var(--surface-border);
     padding: 2rem;
 }

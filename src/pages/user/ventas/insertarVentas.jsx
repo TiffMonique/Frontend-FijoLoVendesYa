@@ -151,16 +151,7 @@ const CompRegistrarVentas = () => {
             className="form-control"
           ></input>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Fecha</label>
-          <input
-            name="fechaPublicacion"
-            value={fechaPublicacion}
-            onChange={(e) => setFechaPublicacion(e.target.value)}
-            type="date"
-            className="form-control"
-          ></input>
-        </div>
+
         <div className="mb-3">
           <label className="form-label">Foto</label>
           <input

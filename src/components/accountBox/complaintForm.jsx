@@ -84,7 +84,7 @@ export function Complaint(props) {
             console.log(error);
             swal({
               title: "HA OCURRIDO UN ERROR",
-              text: error.response.data.message,
+              text: error.message,
               icon: "error",
               button: "Aceptar",
               timer: "1500",

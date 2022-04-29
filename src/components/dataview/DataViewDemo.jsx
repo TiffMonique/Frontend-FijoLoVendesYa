@@ -5,7 +5,6 @@ import { Dropdown } from "primereact/dropdown";
 import { ProductService } from "../../service/ProductService";
 import { Rating } from "primereact/rating";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 export class DataViewDemo extends Component {
   constructor(props) {
@@ -107,7 +106,7 @@ export class DataViewDemo extends Component {
             </span>
           </div>
           <div className="product-grid-item-content  imagenes">
-            <a href={"/user/ventas/mostrarVenta/"+data.idVenta}>
+            <a>
               <img
               src={`http://localhost:4000/uploads/${data.foto}`}
               onError={(e) =>
@@ -127,19 +126,6 @@ export class DataViewDemo extends Component {
             <a href={"/product/" + data.idVenta}>
               <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
             </a>
-            <Link
-              href={{
-                pathname: "/complaint/",
-                query: { idVenta: data.idVenta },
-              }}
-              className="btn btn-prim mt-2 mb-2"
-            >
-              <Button
-                label="Denunciar"
-                icon="pi pi-plus"
-                className="p-button-success mr-2"
-              />
-            </Link>
           </div>
         </div>
       </div>
@@ -158,7 +144,7 @@ export class DataViewDemo extends Component {
   renderHeader() {
     return (
       <div className="grid grid-nogutter">
-        <div className="col-6" style={{ textAlign: "left" }}>
+        {/* <div className="col-6" style={{ textAlign: "left" }}>
           <Dropdown
             options={this.sortOptions}
             value={this.state.sortKey}
@@ -166,7 +152,7 @@ export class DataViewDemo extends Component {
             placeholder="Sort By Price"
             onChange={this.onSortChange}
           />
-        </div>
+        </div> */}
         <div className="col-6" style={{ textAlign: "right" }}>
           <DataViewLayoutOptions
             layout={this.state.layout}

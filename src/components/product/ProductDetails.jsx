@@ -6,7 +6,8 @@ import { ProductService } from "../../service/ProductService";
 import { StarRatingDemo, StarRating } from "./Rate";
 import Rate from "./Rate";
 //import { FancyButton } from "./Buttom";
-
+import Link from "next/link";
+import swal from "sweetalert";
 import { useState, useEffect, useContext } from "react";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
@@ -27,6 +28,10 @@ const Container = styled.div`
 
   .columWidth {
     width: 735px;
+  }
+
+  .columWidth2 {
+    width: 550px;
   }
 `;
 
@@ -132,7 +137,33 @@ const ProductDetails = (data) => {
         router.push('/chat/');
       }
     } else {
-      console.log('no está logeado')
+      swal({
+        title: "Debe estar logeado para contactar al vendedor",
+        text: "¿Deseas hacer login ahora",
+        icon: "info",
+        buttons: true,
+      }).then((acepta) => {
+        if (acepta) {
+          router.push("/login")
+        }
+      });
+    }
+  }
+
+  const handleDenunciar= () => {
+    if (user.logged) {
+      router.push("/complaint?idVenta:"+idVenta)
+    } else {
+      swal({
+        title: "Debe estar logeado para denunciar",
+        text: "¿Deseas hacer login ahora",
+        icon: "info",
+        buttons: true,
+      }).then((acepta) => {
+        if (acepta) {
+          router.push("/login")
+        }
+      });
     }
   }
 
@@ -144,15 +175,10 @@ const ProductDetails = (data) => {
             <GalleryProduct fotos={fotos} />
           </Colum1>
 
-          <Colum2>
+          <Colum2 className="columWidth2">
             <div className="col-12 col-lg-7 mt-7">
-              <h3>{producto}</h3>
+              <h1>{producto}</h1>
               <p id="product_id">{producto}</p>
-
-              {/* <div className="rating-outer">
-              <div className="rating-inner"></div>
-            </div>
-            <span id="no_of_reviews">(Porcentaje)</span> */}
             </div>
             <hr />
             <p id="product_price">L. {precio}</p>
@@ -160,10 +186,10 @@ const ProductDetails = (data) => {
             Estado: <span id="stock_status">{estado}</span>
             <p></p>
             <hr />
-            <h4 className="mt-2">Descripcion:</h4>
+            <h4>Descripción:</h4>
             <p>{descripcion}</p>
             <hr />
-            <button
+            {/* <button
               id="review_btn"
               type="button"
               className="btn btn-primary mt-4"
@@ -174,7 +200,7 @@ const ProductDetails = (data) => {
               }}
             >
               Contactar Vendedor
-            </button>
+            </button> */}
             <button
               id="review_btn"
               type="button"
@@ -185,81 +211,35 @@ const ProductDetails = (data) => {
               <Icon icon="ant-design:heart-outlined" color="#fff" height="25" />{" "}
               Agregar a Favoritos
             </button>
-            <hr />
-            <div style={styles.container}>
-              <h2> Calificacion </h2>
-
-              <div style={styles.stars}>
-                <Rating rating={rating} user={user}/>
-              </div>
-
-              {/* <div style={styles.stars}>
-                {stars.map((_, index) => {
-                  return (
-                    <div>
-                      <FaStar
-                        count={5}
-                        key={index}
-                        size={24}
-                        onClick={() => handleClick(index + 1)}
-                        onMouseOver={() => handleMouseOver(index + 1)}
-                        onMouseLeave={handleMouseLeave}
-                        color={
-                          (hoverValue || currentValue) > index
-                            ? colors.orange
-                            : colors.grey
-                        }
-                        style={{
-                          marginRight: 10,
-                          cursor: "pointer",
-                        }}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-              <textarea
-                placeholder="Como ha sido su experiencia?"
-                style={styles.textarea}
-              />
-
-              <button style={styles.button}>Enviar</button> */}
-              {/* <FancyButton
-              suscrito={categoria.suscrito}
-              nombre={categoria.nombre}
-              setSuscripcion={setSuscripcion}
-            /> */}
-              <div className="row mt-2 mb-5">
-                <div className="rating w-50">
-                  <div
-                    className="modal fade"
-                    id="ratingModal"
-                    tabIndex="-1"
-                    role="dialog"
-                    aria-labelledby="ratingModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog" role="document">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <h5 className="modal-title" id="ratingModalLabel">
-                            Enviar
-                          </h5>
-                          <button
-                            type="button"
-                            className="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button
+              id="review_btn"
+              type="button"
+              className="btn btn-primary mt-4"
+              data-toggle="modal"
+              data-target="#ratingModal"
+              onClick={() => {
+                handleContactar()
+              }}
+            >
+              <Icon icon="ant-design:phone-twotone" color="#fff" height="25" />{" "}
+              Contactar Vendedor
+            </button>
+            
+              <button
+                id="review_btn"
+                type="button"
+                className="btn btn-primary mt-4"
+                data-toggle="modal"
+                data-target="#ratingModal"
+                onClick={()=>handleDenunciar()}
+              >
+                <Icon
+                  icon="ant-design:form-outlined"
+                  color="#fff"
+                  height="25"
+                />{" "}
+                Denunciar Vendedor
+              </button>
           </Colum2>
         </Container>
       </div>

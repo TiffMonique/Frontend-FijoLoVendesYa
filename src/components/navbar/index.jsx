@@ -12,6 +12,7 @@ import {
   BiShoppingBag,
 } from "react-icons/bi";
 import { style } from "@mui/system";
+import { useLocation } from "react-router-dom";
 
 
 
@@ -19,6 +20,8 @@ const Navbar = () => {
 
 
   const buscar = async (categoria, busqueda , departamento) => {
+
+    
     const URI = "/Busqueda?"
     if(categoria !== "Elige una Cat"){
       URI = URI + "categoria="+categoria
@@ -29,6 +32,8 @@ const Navbar = () => {
     if(busqueda !== ""){
       URI = URI + "&busqueda="+busqueda
     }
+
+
     
     await router.push(URI);
     location.reload();
@@ -47,8 +52,11 @@ const Navbar = () => {
   
  
   useEffect(() => {
+    
     setDepartamento("Elige un Depto")
     listacategorias();
+    
+    
   }, []);
 
   const listacategorias = async (e) => {

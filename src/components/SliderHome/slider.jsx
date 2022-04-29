@@ -5,7 +5,7 @@ import {
   Navigation,
   Pagination,
   Scrollbar,
-  //Autoplay,
+  Autoplay,
   EffectCube,
 } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,24 +14,24 @@ export default function ImageSliderHome() {
   return (
     <>
       <Swiper
-        // navigation={true}
-        // autoplay={{
-        //   delay: 2500,
-        //   disableOnInteraction: false,
-        // }}
-        // cubeEffect={{
-        //   shadow: true,
-        //   slideShadows: true,
-        //   shadowOffset: 20,
-        //   shadowScale: 0.94,
-        // }}
+        navigation={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        cubeEffect={{
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        }}
         className="mySwiper"
         modules={[
           Navigation,
           Pagination,
           Scrollbar,
           A11y,
-          //Autoplay,
+          Autoplay,
           EffectCube,
         ]}
         //spaceBetween={1}
