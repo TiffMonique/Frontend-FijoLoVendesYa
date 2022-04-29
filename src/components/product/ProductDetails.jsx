@@ -7,10 +7,12 @@ import { StarRatingDemo, StarRating } from "./Rate";
 import Rate from "./Rate";
 //import { FancyButton } from "./Buttom";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
-
+import ContextSocket from "../../context/context-socketio";
+import ContextUser from "../../context/UserContext";
+import { useRouter } from "next/router";
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -43,12 +45,14 @@ const Colum2 = styled.div`
 `;
 
 const ProductDetails = (data) => {
+  const router = useRouter();
+  const [idUsuario, setIdUsuario] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
-
+  const user = useContext(ContextUser);
   const [calificacion, setCalificacion] = useState(0);
   const stars = Array(5).fill(0);
-  const [idUsuario, setIdUsuario] = useState("");
+  
   const [estado, setEstado] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [producto, setProducto] = useState("");
@@ -58,18 +62,24 @@ const ProductDetails = (data) => {
   const [fechaPublicacion, setFechaPublicacion] = useState("");
   const [fotos, setFotos] = useState([]);
   const [idVenta, setIdVenta] = useState("");
-
-  const Rating = () => {
-    const [rating, setRating] = useState(0);
-    const [rating2, setRating2] = useState(0);
+  const {Socket} = useContext(ContextSocket);
+  const [rating, setRating] = useState(0);
+  const Rating = (props) => {
+    const calificar = (rate)=>{
+      if(user.logged){
+        setRating(rate)
+      }
+    }
     return (
-      <>
+      <>{(props.user.logged)?
         <div className="row">
-          <Rate rating={rating} onRating={(rate) => setRating(rate)} />
-          <p>Rating - {rating}</p>
-          {/* <Rate rating={rating2} onRating={(rate) => setRating2(rate)} />
-            <p>Rating - {rating2}</p> */}
-        </div>
+          <Rate rating={props.rating} onRating={(rate) => calificar(rate)} />
+          <p>Rating - {props.rating}</p>
+        </div>:
+        <div className="row">
+          <Rate rating={props.rating} onRating={() => {}}/>
+          <p>Rating - {props.rating}</p>
+        </div>}
       </>
     );
   };
@@ -90,7 +100,8 @@ const ProductDetails = (data) => {
     const location = window.location.href.split("/");
     const id = location[location.length - 1];
     const response = await fetch(
-      "http://localhost:4000/api/tienda/buscarVenta/" + id
+      "http://localhost:4000/api/tienda/buscarVenta/" + id,
+      {credentials:"include"}
     );
     const data = await response.json();
     setCategoria(data.categoria);
@@ -101,8 +112,29 @@ const ProductDetails = (data) => {
     setPrecio(data.precio);
     setFechaPublicacion(data.fechaPublicacion);
     setFotos(data.fotos);
+    setIdUsuario(data.Usuario.idUsuarios);
+    setIdVenta(data.idVenta);
+    if(data.calificacion) {
+      setRating(parseInt(data.calificacion))
+    }
     console.log(data);
   }, []);
+
+  const handleContactar = () => {
+    if(user.logged) {
+      console.log('contactar');
+      if (Socket) {
+        Socket.emit("mensaje", {
+          idVenta: idVenta,
+          tipo: 'venta',
+          idContacto: idUsuario
+        })
+        router.push('/chat/');
+      }
+    } else {
+      console.log('no está logeado')
+    }
+  }
 
   return (
     <div>
@@ -137,6 +169,9 @@ const ProductDetails = (data) => {
               className="btn btn-primary mt-4"
               data-toggle="modal"
               data-target="#ratingModal"
+              onClick={() => {
+                handleContactar()
+              }}
             >
               Contactar Vendedor
             </button>
@@ -155,7 +190,7 @@ const ProductDetails = (data) => {
               <h2> Calificacion </h2>
 
               <div style={styles.stars}>
-                <Rating />
+                <Rating rating={rating} user={user}/>
               </div>
 
               {/* <div style={styles.stars}>

@@ -4,7 +4,8 @@ import Button from "../button";
 import { StyledNavbarContainer } from "./styled";
 import { Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useContext } from "react";
+import ContextUser from "../../../context/UserContext";
 import {
   BiMessageRounded,
   BiUser,
@@ -13,15 +14,12 @@ import {
 } from "react-icons/bi";
 import { style } from "@mui/system";
 
-
-
 const Navbar = () => {
-
-
+  const user = useContext(ContextUser);
   const buscar = async (categoria, busqueda , departamento) => {
     const URI = "/Busqueda?"
     if(categoria !== "Elige una Cat"){
-      URI = URI + "categoria="+categoria
+      URI = URI + "&categoria="+categoria
     } 
     if(departamento !== "Elige un Depto"){
       URI = URI + "&departamento="+departamento
@@ -37,15 +35,6 @@ const Navbar = () => {
       setBusqueda(response.data);
    */
     }
-    
-   
-
- 
- 
-   
-
-  
- 
   useEffect(() => {
     setDepartamento("Elige un Depto")
     listacategorias();
@@ -179,8 +168,8 @@ const Navbar = () => {
             </li>
 
             <li className="li">
-              <Link href="">
-                <BiMessageRounded size="30" />
+              <Link href="/chat/">
+                <BiMessageRounded size="30"/>
               </Link>
             </li>
             <li className="li">
@@ -194,31 +183,47 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-         
-          
-          
-
-
-          <div className="loginButtons">
-            <Button
-              as="a"
-              width="120px"
-              onClick={() => {
-                router.push("/#");
-              }}
-            >
-              Publicar Anuncio
-            </Button>
-            <Button
-              as="a"
-              width="120px"
-              onClick={() => {
-                router.push("/user/ventas/insertarVentas");
-              }}
-            >
-              Publicar Producto
-            </Button>
-          </div>
+          {
+            (user.logged)?
+            <div className="loginButtons">
+              <Button
+                as="a"
+                width="120px"
+                onClick={() => {
+                  router.push("/#");
+                }}
+              >
+                Publicar Anuncio
+              </Button>
+              <Button
+                as="a"
+                width="120px"
+                onClick={() => {
+                  router.push("/user/ventas/insertarVentas");
+                }}
+              >
+                Publicar Producto
+              </Button>
+            </div>
+            :
+            <ul className="ul">
+            <li className="li">
+              <Link href="/register">
+                <a className="link">Registrar</a>
+              </Link>
+            </li>
+            <li className="li">
+              <Link href="/">
+                <a className="nolin">o</a>
+              </Link>
+            </li>
+            <li className="li">
+              <Link href="/login">
+                <a className="link">Iniciar sesión</a>
+              </Link>
+            </li>
+          </ul>
+          }
         </div>
       </div>
     </StyledNavbarContainer>

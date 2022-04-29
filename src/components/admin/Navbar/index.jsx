@@ -36,8 +36,8 @@ const Navbar = () => {
             </li>
 
             <li className="li">
-              <Link href="">
-                <BiMessageRounded size="30" />
+              <Link href="/chat/">
+                <BiMessageRounded size="30"/>
               </Link>
             </li>
             <li className="li">

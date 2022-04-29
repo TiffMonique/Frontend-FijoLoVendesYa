@@ -70,9 +70,11 @@ export function Singinup(props) {
         { withCredentials: true }
       )
       .then((response) => {
-        const admin = response.data.admin;console.log(user);
+        const admin = response.data.admin;
+        const idUsuario = response.data.idUsuario;
         user.setlogged(true); 
-        user.setadmin(admin)
+        user.setadmin(admin);
+        user.setIdUsuario(idUsuario);
         //socket.conectar();
         console.log('Despues de conectar');
         swal({

@@ -1,32 +1,37 @@
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
-export async function calificar(calificacion) {
-  const location = window.location.href.split("/");
-  const id = location[location.length - 1];
-  console.log(id);
-  console.log(calificacion);
-  await axios
-    .post(
-      "http://localhost:4000/api/tienda/calificar",
-      {
-        idVenta: id,
-        calificacion: calificacion,
-      },
-      { withCredentials: true }
-    )
-    .then((response) => {
-      console.log("hola" + response);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+import ContextUser from "../../context/UserContext";
+export async function calificar(calificacion, user) {
+  if (user.logged) {
+    const location = window.location.href.split("/");
+    const id = location[location.length - 1];
+    console.log(id);
+    console.log(calificacion);
+    await axios
+      .post(
+        "http://localhost:4000/api/tienda/calificar",
+        {
+          idVenta: id,
+          calificacion: calificacion,
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        console.log("hola" + response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    console.log('No está logeado')
+  }
 }
 const Rate = ({ count, rating, color, onRating }) => {
   const [hoverRating, setHoverRating] = useState(0);
-
+  const user = useContext(ContextUser);
   const getColor = (index) => {
     if (hoverRating >= index) {
       return color.filled;
@@ -39,6 +44,7 @@ const Rate = ({ count, rating, color, onRating }) => {
 
   const starRating = useMemo(
     (props) => {
+      
       return Array(count)
         .fill(0)
         .map((_, i) => i + 1)
@@ -50,7 +56,7 @@ const Rate = ({ count, rating, color, onRating }) => {
             icon={"fa-regular fa-star"}
             onClick={() => {
               onRating(idx);
-              calificar(idx);
+              calificar(idx, user);
             }}
             style={{ color: getColor(idx) }}
             onMouseEnter={() => setHoverRating(idx)}
