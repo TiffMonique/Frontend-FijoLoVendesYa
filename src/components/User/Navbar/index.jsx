@@ -14,11 +14,12 @@ import {
 import { style } from "@mui/system";
 import { Icon } from "@iconify/react";
 
+
 const Navbar = () => {
   const buscar = async (categoria, busqueda, departamento) => {
     const URI = "/Busqueda?";
     if (categoria !== "Elige una Cat") {
-      URI = URI + "categoria=" + categoria;
+      URI = URI + "&categoria=" + categoria;
     }
     if (departamento !== "Elige un Depto") {
       URI = URI + "&departamento=" + departamento;
@@ -34,11 +35,40 @@ const Navbar = () => {
       setBusqueda(response.data);
    */
   };
+  
+  
 
   useEffect(() => {
+    let query = new URLSearchParams(router.asPath);
+    const busqueda = query.get("busqueda")
+    if(busqueda ){
+      setBusqueda(busqueda);
+    }
+    
     setDepartamento("Elige un Depto");
     listacategorias();
+    
+
+    const depto = query.get("departamento")
+    if(depto){
+      setDepartamento(depto);
+    }
+    
+    
   }, []);
+
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(async() => {
+    let query = new URLSearchParams(router.asPath);
+    const category = await query.get("categoria")
+    if(category){
+      setCategoria(category);
+    } 
+    console.log(router.asPath);
+
+  },[]);
+  
 
   const listacategorias = async (e) => {
     const response = await fetch(
@@ -49,15 +79,20 @@ const Navbar = () => {
     data.push(catNueva);
     setCategorias(data);
     setCategoria(data[data.length - 1].nombre);
+    
   };
 
-  const [categorias, setCategorias] = useState([]);
+  
   const [categoria, setCategoria] = useState("");
 
   const [busqueda, setBusqueda] = useState("");
   const [departamento, setDepartamento] = useState("");
 
   const router = useRouter();
+  
+
+  
+
   return (
     <StyledNavbarContainer>
       <div className="container">

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import { Carousel } from "primereact/carousel";
 import { Button } from "primereact/button";
-import { ProductService } from "../../service/ProductService";
+import { ProductService } from "../../service2/ProductService";
 
 const arrayImage = [
   { imagen: "images/carro.jpg" },
@@ -15,6 +15,7 @@ const arrayImage = [
   { imagen: "images/carroClasic.jpg" },
   { imagen: "images/gatos.jpg" },
   { imagen: "images/futureParents.jpg" },
+  { imagen: "images/futureParents.jpg" }
 ];
 
 const CarouselDemo = () => {
@@ -41,7 +42,7 @@ const CarouselDemo = () => {
 
   useEffect(() => {
     productService
-      .getProductsSmall()
+      .getProducts()
       .then((data) => setProducts(data.slice(0, 9)));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -62,7 +63,7 @@ const CarouselDemo = () => {
           </div>
           <div>
             <h4 className="mb-1">{data.producto}</h4>
-            <h6 className="mt-0 mb-3">${data.precio}</h6>
+            <h6 className="mt-0 mb-3">L.{data.precio}</h6>
 
             <span className="product-badge status">{data.estado}</span>
             <div className="car-buttons mt-5">
