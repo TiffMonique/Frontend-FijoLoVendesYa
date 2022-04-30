@@ -111,6 +111,15 @@ function LeftNavbar() {
           </li>
           <li>
             <FontAwesomeIcon
+              icon={faRocket}
+              style={{ width: "18px", cursor: "pointer" }}
+            />{" "}
+            <Link href="/admin/listausuarios">
+              <a>Usuarios</a>
+            </Link>
+          </li>
+          <li>
+            <FontAwesomeIcon
               icon={faMessage}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
