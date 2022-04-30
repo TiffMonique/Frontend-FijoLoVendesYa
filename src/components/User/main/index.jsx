@@ -4,12 +4,15 @@ import ContextSocket from "../../../context/context-socketio";
 import ContextChat from "../../../context/ChatContext";
 import UserContext from "../../../context/UserContext";
 import UseUser from "../../../hooks/UseUser";
+import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 const Main = ({ children }) => {
   const {chats, setChats, } = useContext(ContextChat);
   const {Socket, conectar, } = useContext(ContextSocket);
   const user = useContext(UserContext);
+  var router = useRouter();
   useEffect(() => {
+    
     if (user.logged) {
       if (Socket) {
         const handler = (msg) => {

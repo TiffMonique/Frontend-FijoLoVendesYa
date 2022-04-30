@@ -20,7 +20,7 @@
 
 .messages-box,
 .chat-box {
-  height: 810px;
+  height: 510px;
   overflow-y: scroll;
 }
 

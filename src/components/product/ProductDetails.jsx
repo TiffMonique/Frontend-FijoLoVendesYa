@@ -79,11 +79,9 @@ const ProductDetails = (data) => {
       <>{(props.user.logged)?
         <div className="row">
           <Rate rating={props.rating} onRating={(rate) => calificar(rate)} />
-          <p>Rating - {props.rating}</p>
         </div>:
         <div className="row">
           <Rate rating={props.rating} onRating={() => {}}/>
-          <p>Rating - {props.rating}</p>
         </div>}
       </>
     );
@@ -188,6 +186,14 @@ const ProductDetails = (data) => {
             <hr />
             <h4>Descripción:</h4>
             <p>{descripcion}</p>
+            <hr />
+            <div style={styles.container}>
+              <h2> Calificación </h2>
+
+              <div style={styles.stars}>
+              <Rating rating={rating} user={user}/>
+              </div>
+            </div>
             <hr />
             {/* <button
               id="review_btn"
