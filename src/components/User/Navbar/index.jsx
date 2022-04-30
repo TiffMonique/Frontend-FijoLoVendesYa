@@ -17,7 +17,7 @@ import { style } from "@mui/system";
 const Navbar = () => {
   const user = useContext(ContextUser);
   const buscar = async (categoria, busqueda , departamento) => {
-    const URI = "/Busqueda?"
+    const URI = "/Busqueda/?"
     if(categoria !== "Elige una Cat"){
       URI = URI + "&categoria="+categoria
     } 
@@ -37,35 +37,24 @@ const Navbar = () => {
   };
   
   useEffect(() => {
-    let query = new URLSearchParams(router.asPath);
+    let query = new URLSearchParams(window.location.href);
     const busqueda = query.get("busqueda")
     if(busqueda ){
       setBusqueda(busqueda);
     }
-    
     setDepartamento("Elige un Depto");
     listacategorias();
-    
-
     const depto = query.get("departamento")
     if(depto){
       setDepartamento(depto);
     }
-    
-    
-  }, []);
-
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(async() => {
-    let query = new URLSearchParams(router.asPath);
-    const category = await query.get("categoria")
+    const category = query.get("categoria")
     if(category){
       setCategoria(category);
     } 
-    console.log(router.asPath);
+  }, []);
 
-  },[]);
+  const [categorias, setCategorias] = useState([]);
   
 
   const listacategorias = async (e) => {
@@ -76,8 +65,13 @@ const Navbar = () => {
     const catNueva = { nombre: "Elige una Cat" };
     data.push(catNueva);
     setCategorias(data);
-    setCategoria(data[data.length - 1].nombre);
-    
+    let query = new URLSearchParams(window.location.href);
+    const category = query.get("categoria")
+    if(category){
+      setCategoria(category);
+    } else {
+      setCategoria("Elige una Cat")
+    }
   };
 
   

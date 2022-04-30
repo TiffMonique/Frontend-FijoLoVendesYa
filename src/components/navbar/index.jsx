@@ -24,7 +24,7 @@ const Navbar = () => {
     
     const URI = "/Busqueda?"
     if(categoria !== "Elige una Cat"){
-      URI = URI + "categoria="+categoria
+      URI = URI + "&categoria="+categoria
     } 
     if(departamento !== "Elige un Depto"){
       URI = URI + "&departamento="+departamento
