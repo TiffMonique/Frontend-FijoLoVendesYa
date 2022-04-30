@@ -82,6 +82,7 @@ const CompMostrarVentas = () => {
                 <th>Precio</th>
                 <th>Fecha</th>
                 <th>ACCIONES</th>
+                <th>Crear Anuncios</th>
               </tr>
             </thead>
             <tbody>

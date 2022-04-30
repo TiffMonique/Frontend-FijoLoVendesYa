@@ -57,7 +57,7 @@ const ProductDetails = (data) => {
   const user = useContext(ContextUser);
   const [calificacion, setCalificacion] = useState(0);
   const stars = Array(5).fill(0);
-  
+
   const [estado, setEstado] = useState("");
   const [cantidad, setCantidad] = useState("");
   const [producto, setProducto] = useState("");
@@ -67,22 +67,25 @@ const ProductDetails = (data) => {
   const [fechaPublicacion, setFechaPublicacion] = useState("");
   const [fotos, setFotos] = useState([]);
   const [idVenta, setIdVenta] = useState("");
-  const {Socket} = useContext(ContextSocket);
+  const { Socket } = useContext(ContextSocket);
   const [rating, setRating] = useState(0);
   const Rating = (props) => {
-    const calificar = (rate)=>{
-      if(user.logged){
-        setRating(rate)
+    const calificar = (rate) => {
+      if (user.logged) {
+        setRating(rate);
       }
-    }
+    };
     return (
-      <>{(props.user.logged)?
-        <div className="row">
-          <Rate rating={props.rating} onRating={(rate) => calificar(rate)} />
-        </div>:
-        <div className="row">
-          <Rate rating={props.rating} onRating={() => {}}/>
-        </div>}
+      <>
+        {props.user.logged ? (
+          <div className="row">
+            <Rate rating={props.rating} onRating={(rate) => calificar(rate)} />
+          </div>
+        ) : (
+          <div className="row">
+            <Rate rating={props.rating} onRating={() => {}} />
+          </div>
+        )}
       </>
     );
   };
@@ -104,7 +107,7 @@ const ProductDetails = (data) => {
     const id = location[location.length - 1];
     const response = await fetch(
       "http://localhost:4000/api/tienda/buscarVenta/" + id,
-      {credentials:"include"}
+      { credentials: "include" }
     );
     const data = await response.json();
     setCategoria(data.categoria);
@@ -117,22 +120,22 @@ const ProductDetails = (data) => {
     setFotos(data.fotos);
     setIdUsuario(data.Usuario.idUsuarios);
     setIdVenta(data.idVenta);
-    if(data.calificacion) {
-      setRating(parseInt(data.calificacion))
+    if (data.calificacion) {
+      setRating(parseInt(data.calificacion));
     }
     console.log(data);
   }, []);
 
   const handleContactar = () => {
-    if(user.logged) {
-      console.log('contactar');
+    if (user.logged) {
+      console.log("contactar");
       if (Socket) {
         Socket.emit("mensaje", {
           idVenta: idVenta,
-          tipo: 'venta',
-          idContacto: idUsuario
-        })
-        router.push('/chat/');
+          tipo: "venta",
+          idContacto: idUsuario,
+        });
+        router.push("/chat/");
       }
     } else {
       swal({
@@ -142,15 +145,15 @@ const ProductDetails = (data) => {
         buttons: true,
       }).then((acepta) => {
         if (acepta) {
-          router.push("/login")
+          router.push("/login");
         }
       });
     }
-  }
+  };
 
-  const handleDenunciar= () => {
+  const handleDenunciar = () => {
     if (user.logged) {
-      router.push("/complaint?idVenta:"+idVenta)
+      router.push("/complaint?idVenta:" + idVenta);
     } else {
       swal({
         title: "Debe estar logeado para denunciar",
@@ -159,11 +162,11 @@ const ProductDetails = (data) => {
         buttons: true,
       }).then((acepta) => {
         if (acepta) {
-          router.push("/login")
+          router.push("/login");
         }
       });
     }
-  }
+  };
 
   return (
     <div>
@@ -191,7 +194,7 @@ const ProductDetails = (data) => {
               <h2> Calificación </h2>
 
               <div style={styles.stars}>
-              <Rating rating={rating} user={user}/>
+                <Rating rating={rating} user={user} />
               </div>
             </div>
             <hr />
@@ -224,28 +227,23 @@ const ProductDetails = (data) => {
               data-toggle="modal"
               data-target="#ratingModal"
               onClick={() => {
-                handleContactar()
+                handleContactar();
               }}
             >
               <Icon icon="ant-design:phone-twotone" color="#fff" height="25" />{" "}
               Contactar Vendedor
             </button>
-            
-              <button
-                id="review_btn"
-                type="button"
-                className="btn btn-primary mt-4"
-                data-toggle="modal"
-                data-target="#ratingModal"
-                onClick={()=>handleDenunciar()}
-              >
-                <Icon
-                  icon="ant-design:form-outlined"
-                  color="#fff"
-                  height="25"
-                />{" "}
-                Denunciar Vendedor
-              </button>
+            <button
+              id="review_btn"
+              type="button"
+              className="btn btn-primary mt-4"
+              data-toggle="modal"
+              data-target="#ratingModal"
+              onClick={() => handleDenunciar()}
+            >
+              <Icon icon="ant-design:form-outlined" color="#fff" height="25" />{" "}
+              Denunciar Vendedor
+            </button>
           </Colum2>
         </Container>
       </div>

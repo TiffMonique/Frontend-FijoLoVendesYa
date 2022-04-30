@@ -4,10 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import ContextUser from "../../context/UserContext";
-export async function calificar(calificacion, user) {
+import swal from "sweetalert";
+import { useRouter } from "next/router";
+
+export async function calificar(calificacion, user, router) {
   if (user.logged) {
     const location = window.location.href.split("/");
     const id = location[location.length - 1];
+
     console.log(id);
     console.log(calificacion);
     await axios
@@ -26,12 +30,22 @@ export async function calificar(calificacion, user) {
         console.log(err);
       });
   } else {
-    console.log('No está logeado')
+    swal({
+      title: "Debe estar logeado para calificar el vendedor",
+      text: "¿Deseas hacer login ahora?",
+      icon: "warning",
+      buttons: true,
+    }).then((acepta) => {
+      if (acepta) {
+        router.push("/login");
+      }
+    });
   }
 }
 const Rate = ({ count, rating, color, onRating }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const user = useContext(ContextUser);
+  const router = useRouter();
   const getColor = (index) => {
     if (hoverRating >= index) {
       return color.filled;
@@ -44,7 +58,6 @@ const Rate = ({ count, rating, color, onRating }) => {
 
   const starRating = useMemo(
     (props) => {
-      
       return Array(count)
         .fill(0)
         .map((_, i) => i + 1)
@@ -56,7 +69,7 @@ const Rate = ({ count, rating, color, onRating }) => {
             icon={"fa-regular fa-star"}
             onClick={() => {
               onRating(idx);
-              calificar(idx, user);
+              calificar(idx, user, router);
             }}
             style={{ color: getColor(idx) }}
             onMouseEnter={() => setHoverRating(idx)}
