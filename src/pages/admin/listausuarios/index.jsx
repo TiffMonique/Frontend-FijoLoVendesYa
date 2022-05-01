@@ -1,12 +1,12 @@
-import NavAndFooter from "../../../components/User/NavAndFooter";
+import SideBar from "../../../components/admin/SideBar";
 import Usuarios from "./listarusuarios";
 
 const index = () => {
   return (
     <>
-      <NavAndFooter>
-        <Usuarios/>
-      </NavAndFooter>
+      <SideBar>
+      <Usuarios/>
+      </SideBar>
     </>
   );
 };

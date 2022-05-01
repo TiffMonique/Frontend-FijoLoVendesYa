@@ -7,7 +7,12 @@ import ContextUser from "../../context/UserContext";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 
+<<<<<<< Updated upstream
 export async function calificar(calificacion, user, router, setRating) {
+=======
+export async function calificar(calificacion, user, router) {
+
+>>>>>>> Stashed changes
   if (user.logged) {
     const location = window.location.href.split("/");
     const id = location[location.length - 1];
