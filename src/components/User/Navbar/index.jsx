@@ -190,7 +190,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="li">
-              <Link href="">
+              <Link href="/user/favoritos">
                 <BiHeart size="30" />
               </Link>
             </li>

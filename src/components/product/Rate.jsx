@@ -4,10 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import ContextUser from "../../context/UserContext";
+<<<<<<< Updated upstream
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 
 export async function calificar(calificacion, user, router) {
+=======
+
+export async function calificar(calificacion, user) {
+>>>>>>> Stashed changes
   if (user.logged) {
     const location = window.location.href.split("/");
     const id = location[location.length - 1];
