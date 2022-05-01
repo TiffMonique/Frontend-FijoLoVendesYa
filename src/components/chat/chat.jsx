@@ -52,6 +52,15 @@ const chat = () => {
           var chatsNevo = chats.slice();
           const i = chatsNevo.findIndex((chat) => chat.idChat == msg.idChat);
           const mensajes = chatsNevo[i].mensajes.slice();
+          if(chatActual){
+            if(chatsNevo[i].idChat!=chatActual.idChat){
+              chatsNevo[i].sinleer = true;
+            }else {
+              if(msg.idUsuario!=user.idUsuario){
+                Socket.emit("confLectura", {idChat: msg.idChat})
+              }
+            }
+          }
           mensajes.push(msg);
           chatsNevo[i].mensajes = mensajes;
           const chatsOrdenado = ordenarChats(chatsNevo);
@@ -102,8 +111,15 @@ const chat = () => {
 
   const handleClicChat = (idChat) => {
     var chat = chats.find((chat) => chat.idChat == idChat);
+    const chatscopia = chats.slice();
+    const i = chatscopia.findIndex((chat)=>chat.idChat==idChat);
+    if(chatscopia[i].sinleer){
+      Socket.emit("confLectura", {idChat:idChat})
+    }
+    chatscopia[i].sinleer=false;
     var mensajes = chat.mensajes.slice();
     chat.mensajes = mensajes;
+    setChats(chatscopia)
     setchatActual(chat);
   };
 
@@ -264,9 +280,12 @@ const chat = () => {
                               handleClicChat(chat.idChat);
                             }}
                             className={
-                              chat.idChat == chatActual.idChat
+                              (chat.sinleer)?
+                              "list-group-item list-group-item-success rounded-0"
+                              :
+                              (chat.idChat == chatActual.idChat 
                                 ? "list-group-item list-group-item-action active text-white rounded-0"
-                                : "list-group-item list-group-item-action list-group-item-light rounded-0"
+                                : "list-group-item list-group-item-action list-group-item-light rounded-0")
                             }
                           >
                             <div className="media">

@@ -157,7 +157,7 @@ const ProductDetails = (data) => {
 
   const handleDenunciar = () => {
     if (user.logged) {
-      router.push("/complaint?idVenta:" + idVenta);
+      router.push("/complaint?idVenta=" + idVenta);
     } else {
       swal({
         title: "Debe estar logeado para denunciar",
