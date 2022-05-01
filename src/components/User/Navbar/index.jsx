@@ -6,8 +6,10 @@ import { Input } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
 import ContextUser from "../../../context/UserContext";
+import ContextChat from "../../../context/ChatContext";
 import {
   BiMessageRounded,
+  BiMessageRoundedError,
   BiUser,
   BiHeart,
   BiShoppingBag,
@@ -109,7 +111,6 @@ const Navbar = () => {
   };
 
   const [categoria, setCategoria] = useState("");
-
   const [busqueda, setBusqueda] = useState("");
   const [departamento, setDepartamento] = useState("");
 

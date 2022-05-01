@@ -26,6 +26,7 @@ const Main = ({ children }) => {
           var chatsNevo = chats.slice();
           const i = chatsNevo.findIndex((chat)=>chat.idChat==msg.idChat);
           const mensajes = chatsNevo[i].mensajes.slice();
+          chatsNevo[i].sinleer = true;
           mensajes.push(msg);
           chatsNevo[i].mensajes = mensajes;
           const chatsOrdenado = ordenarChats(chatsNevo);
