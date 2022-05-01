@@ -82,7 +82,6 @@ const CompMostrarVentas = () => {
                 <th>Fecha</th>
                 <th>ACCIONES</th>
                 <th>Foto</th>
-                <th>PDF</th>
               </tr>
             </thead>
             <tbody>
