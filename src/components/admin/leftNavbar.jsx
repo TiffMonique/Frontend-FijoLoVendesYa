@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import styles from "../../styles/Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
@@ -32,18 +32,17 @@ import Link from "next/link";
 function LeftNavbar() {
   const router = useRouter();
   const user = useContext(UserContext);
-  const {setSocket, Socket} = useContext(SocketContext);;
+  const { setSocket, Socket } = useContext(SocketContext);
   const handleClicLogOut = async () => {
     await axios
-      .delete(
-        "http://localhost:4000/api/tienda/logout",
-        { withCredentials: true }
-      )
+      .delete("http://localhost:4000/api/tienda/logout", {
+        withCredentials: true,
+      })
       .then((response) => {
         user.setlogged(false);
         user.setadmin(false);
-        user.setidSesion(null)
-        if(Socket) {
+        user.setidSesion(null);
+        if (Socket) {
           Socket.disconnect();
         }
         swal({
@@ -78,8 +77,8 @@ function LeftNavbar() {
               icon={faTachometerAlt}
               style={{ width: "18px", cursor: "pointer" }}
             />{" "}
-            <Link href="/graficos">
-              <a>Graficos</a>
+            <Link href="/admin/estadisticas">
+              <a>Estadísticas</a>
             </Link>
           </li>
           <li>
