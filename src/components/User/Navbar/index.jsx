@@ -217,7 +217,7 @@ const Navbar = () => {
           {user.logged ? (
             <ul className="ul">
               <li className="li">
-                <Link href="">
+                <Link href="user/ventas">
                   <BiShoppingBag size="30" />
                 </Link>
               </li>
