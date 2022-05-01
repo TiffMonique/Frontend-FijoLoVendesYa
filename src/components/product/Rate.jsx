@@ -4,15 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import ContextUser from "../../context/UserContext";
-<<<<<<< Updated upstream
 import swal from "sweetalert";
 import { useRouter } from "next/router";
 
-export async function calificar(calificacion, user, router) {
-=======
-
-export async function calificar(calificacion, user) {
->>>>>>> Stashed changes
+export async function calificar(calificacion, user, router, setRating) {
   if (user.logged) {
     const location = window.location.href.split("/");
     const id = location[location.length - 1];
@@ -29,10 +24,16 @@ export async function calificar(calificacion, user) {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log("hola" + response);
+        console.log(response);
       })
       .catch((err) => {
-        console.log(err);
+        swal({
+          title: "Calificación invalida",
+          text: err?.response?.data.message,
+          icon: "error",
+          button: "Aceptar",
+        });
+        setRating(0);
       });
   } else {
     swal({
@@ -47,7 +48,7 @@ export async function calificar(calificacion, user) {
     });
   }
 }
-const Rate = ({ count, rating, color, onRating }) => {
+const Rate = ({ count, rating, color, onRating, setRating }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const user = useContext(ContextUser);
   const router = useRouter();
@@ -74,7 +75,7 @@ const Rate = ({ count, rating, color, onRating }) => {
             icon={"fa-regular fa-star"}
             onClick={() => {
               onRating(idx);
-              calificar(idx, user, router);
+              calificar(idx, user, router, setRating);
             }}
             style={{ color: getColor(idx) }}
             onMouseEnter={() => setHoverRating(idx)}

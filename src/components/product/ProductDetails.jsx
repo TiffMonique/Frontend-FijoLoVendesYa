@@ -79,7 +79,11 @@ const ProductDetails = (data) => {
       <>
         {props.user.logged ? (
           <div className="row">
-            <Rate rating={props.rating} onRating={(rate) => calificar(rate)} />
+            <Rate
+              rating={props.rating}
+              setRating={setRating}
+              onRating={(rate) => calificar(rate)}
+            />
           </div>
         ) : (
           <div className="row">
@@ -101,7 +105,6 @@ const ProductDetails = (data) => {
   const handleMouseLeave = () => {
     setHoverValue(undefined);
   };
-  
 
   useEffect(async () => {
     const location = window.location.href.split("/");
@@ -169,42 +172,44 @@ const ProductDetails = (data) => {
     }
   };
 
-  const handleFavorito= async (idVenta) => {
+  const handleFavorito = async (idVenta) => {
     if (user.logged) {
       swal({
         title: "Favoritos",
         text: "¿Desea agregar venta a favoritos?",
         icon: "info",
         buttons: true,
-      }).then((acepta)=>{
+      }).then((acepta) => {
         if (acepta) {
-        axios.post(
-          `http://localhost:4000/api/tienda/agregarFavorito/${idVenta}`,
-          {},
-          {
-            withCredentials: true,
-          }
-        ).then((response)=>{
-          swal({
-            title: "AGREGADO A FAVORITOS",
-            text: response?.data?.message,
-            icon: "success",
-            button: "Aceptar",
-            timer: "false",
-          });
-          
-        }).catch((err)=>{
-          swal({
-            title: "HA OCURRIDO UN ERROR",
-            text: err.response.data.message,
-            icon: "error",
-            button: "Aceptar",
-            timer: "false",
-          });
-         });
+          axios
+            .post(
+              `http://localhost:4000/api/tienda/agregarFavorito/${idVenta}`,
+              {},
+              {
+                withCredentials: true,
+              }
+            )
+            .then((response) => {
+              swal({
+                title: "AGREGADO A FAVORITOS",
+                text: response?.data?.message,
+                icon: "success",
+                button: "Aceptar",
+                timer: "false",
+              });
+            })
+            .catch((err) => {
+              swal({
+                title: "HA OCURRIDO UN ERROR",
+                text: err.response.data.message,
+                icon: "error",
+                button: "Aceptar",
+                timer: "false",
+              });
+            });
         }
-      }); 
-    }else {
+      });
+    } else {
       swal({
         title: "Debe estar logeado para agregar a favorito",
         text: "¿Deseas hacer login ahora",
@@ -212,11 +217,11 @@ const ProductDetails = (data) => {
         buttons: true,
       }).then((acepta) => {
         if (acepta) {
-          router.push("/login")
+          router.push("/login");
         }
       });
     }
-  }
+  };
 
   return (
     <div>
@@ -260,7 +265,6 @@ const ProductDetails = (data) => {
             >
               Contactar Vendedor
             </button> */}
-
             <button
               id="review_btn"
               type="button"
@@ -268,13 +272,12 @@ const ProductDetails = (data) => {
               data-toggle="modal"
               data-target="#ratingModal"
               onClick={() => {
-                handleFavorito(idVenta)
+                handleFavorito(idVenta);
               }}
             >
               <Icon icon="ant-design:heart-outlined" color="#fff" height="25" />{" "}
               Agregar a Favoritos
             </button>
-
             <button
               id="review_btn"
               type="button"
