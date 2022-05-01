@@ -7,6 +7,7 @@ import "semantic-ui-css/semantic.min.css";
 import { useState, useEffect, useCallback, useRef, useContext } from "react";
 import ContextUser from "../../../context/UserContext";
 import ContextChat from "../../../context/ChatContext";
+import ContextSocket from "../../../context/context-socketio";
 import {
   BiMessageRounded,
   BiMessageRoundedError,
@@ -20,6 +21,8 @@ import { style } from "@mui/system";
 
 const Navbar = () => {
   const user = useContext(ContextUser);
+  const { Socket } = useContext(ContextSocket);
+  const { chats, sinleer, setsinleer } = useContext(ContextChat);
   const buscar = async (categoria, busqueda, departamento) => {
     const URI = "/Busqueda/?";
     if (categoria !== "Elige una Cat") {
@@ -73,6 +76,16 @@ const Navbar = () => {
         });
       });
   };
+  useEffect(() => {
+    var noleido = false;
+    chats.forEach((chat) => {
+      if (chat.sinleer) {
+        noleido = true;
+      }
+    });
+    setsinleer(noleido);
+  }, [chats]);
+
   useEffect(() => {
     let query = new URLSearchParams(window.location.href);
     const busqueda = query.get("busqueda");
@@ -210,9 +223,15 @@ const Navbar = () => {
               </li>
 
               <li className="li">
-                <Link href="/chat/">
-                  <BiMessageRounded size="30" />
-                </Link>
+                {sinleer ? (
+                  <Link href="/chat/">
+                    <BiMessageRoundedError size="30" />
+                  </Link>
+                ) : (
+                  <Link href="/chat/">
+                    <BiMessageRounded size="30" />
+                  </Link>
+                )}
               </li>
               <li className="li">
                 <a onClick={() => handleClicLogOut()}>
