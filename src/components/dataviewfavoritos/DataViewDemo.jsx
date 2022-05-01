@@ -76,7 +76,7 @@ export class DataViewDemo extends Component {
           });
           var productos = this.state.products;
           const eliminado=productos.findIndex((producto)=> producto.idLista==idLista)
-          productos.splice(eliminado);
+          productos.splice(eliminado,1);
           this.setState({products:productos});
           console.log(productos);
         }).catch((err)=>{
