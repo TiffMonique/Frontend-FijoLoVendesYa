@@ -31,7 +31,6 @@ const Main = ({ children }) => {
           chatsNevo[i].mensajes = mensajes;
           const chatsOrdenado = ordenarChats(chatsNevo);
           setChats(chatsOrdenado);
-          router.push("#"+msg.idMensaje);
         }
         const nuevochat = (chat) => {
           const copiachat = {...chat, mensajes: []};

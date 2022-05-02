@@ -21,7 +21,7 @@ function ImageSlider() {
       .get("http://localhost:4000/api/tienda/missuscripciones", {
         withCredentials: true,
       })
-      .then((res) => {
+      .then((suscripciones) => {
         const categoriasM = categorias.data.map((categoria) => {
           const suscrito = suscripciones.data.includes(categoria.nombre);
           return { ...categoria, suscrito: suscrito };
