@@ -65,7 +65,7 @@ export class DataViewDemo extends Component {
           <div className="product-list-detail">
             <div className="product-name">{data.producto}</div>
             {/* <div className="product-description">{data.descripcion}</div> */}
-            <Rating value={data.rating} readOnly cancel={false}></Rating>
+            <Rating value={data.calificacion} readOnly cancel={false}></Rating>
             <i className="pi pi-tag product-category-icon"></i>
             <span className="product-category">{data.categoria}</span>
           </div>
