@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="content">
           <ul className="ul">
             <li className="li">
-              <Link href="">
+              <Link href="/HomeUser">
                 <BiShoppingBag size="30" />
               </Link>
             </li>

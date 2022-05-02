@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="content">
           <ul className="ul">
             <li className="li">
-              <Link href="">
+              <Link href="/HomeUser">
                 <BiShoppingBag size="30" />
               </Link>
             </li>
@@ -34,12 +34,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="li">
-              <Link href="/">
-                <BiUser size="30" />
-              </Link>
-            </li>
-            <li className="li">
-              <Link href="">
+              <Link href="/user/favoritos">
                 <BiHeart size="30" />
               </Link>
             </li>

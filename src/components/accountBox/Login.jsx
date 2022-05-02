@@ -54,12 +54,12 @@ export function Singinup(props) {
   const router = useRouter();
   const user = UseUser();
   const socket = UseSocket();
-  
+
   //controlador del formulario se activa cuando se envia el formulario
   const onSubmit = async (values) => {
     const { correo, pass } = values;
     console.log(values);
-    
+
     const response = await axios
       .post(
         "http://localhost:4000/api/tienda/login",
@@ -72,11 +72,11 @@ export function Singinup(props) {
       .then((response) => {
         const admin = response.data.admin;
         const idUsuario = response.data.idUsuario;
-        user.setlogged(true); 
+        user.setlogged(true);
         user.setadmin(admin);
         user.setIdUsuario(idUsuario);
         //socket.conectar();
-        console.log('Despues de conectar');
+        console.log("Despues de conectar");
         swal({
           title: "LOGIN EXITOSO",
           text: response?.data?.message,
@@ -200,7 +200,7 @@ export function Singinup(props) {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="" variant="body2">
+                <Link href="/register" variant="body2">
                   {"¿No tienes una cuenta?"}
                 </Link>
               </Grid>

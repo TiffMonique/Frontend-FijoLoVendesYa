@@ -167,7 +167,7 @@ const chat = () => {
               <div className="row heading">
                 <div className="col-sm-3 col-xs-3 heading-avatar">
                   <img
-                    src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                    src="https://img.freepik.com/vector-gratis/icono-circulo-usuario-anonimo-ilustracion-vector-estilo-plano-sombra_520826-1931.jpg"
                     alt="user"
                     width="50"
                     className="rounded-circle"
@@ -177,7 +177,7 @@ const chat = () => {
                     <span class="heading-online">Online</span>
                   </div> */}
                 </div>
-                <div className="col-sm-1 col-xs-1  heading-dot  pull-right">
+                <div className="col-sm-9 heading-dot pull-right">
                   <i
                     className="fa fa-ellipsis-v fa-2x  pull-right"
                     aria-hidden="true"
@@ -222,7 +222,7 @@ const chat = () => {
                           >
                             <div className="media">
                               <img
-                                src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                                src="https://img.freepik.com/vector-gratis/icono-plano-usuario-anonimo-ilustracion-vector-larga-sombra_520826-1932.jpg"
                                 alt="user"
                                 width="50"
                                 className="rounded-circle"
@@ -291,17 +291,17 @@ const chat = () => {
                           >
                             <div className="media">
                               <img
-                                src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                                src="https://img.freepik.com/vector-gratis/icono-plano-usuario-anonimo-ilustracion-vector-larga-sombra_520826-1932.jpg"
                                 alt="user"
                                 width="50"
                                 className="rounded-circle"
                               />
                               <div className="media-body ml-4">
                                 <div className="d-flex align-items-center justify-content-between mb-1">
-                                  <h6 className="mb-0">
+                                  <h5 className="mb-0">
                                     {chat.nombreContacto}{" "}
                                     {chat.apellidoContacto}
-                                  </h6>
+                                  </h5>
                                   <small className="small font-weight-bold">
                                     {chat.mensajes[0] ? (
                                       ago(
@@ -344,7 +344,7 @@ const chat = () => {
             <div className="bg-gray px-4 py-2 bg-light hola">
               <div className="col-sm-3 col-xs-3 heading-avatar">
                 <img
-                  src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                  src="https://img.freepik.com/vector-gratis/icono-plano-usuario-anonimo-ilustracion-vector-larga-sombra_520826-1932.jpg"
                   alt="user"
                   width="50"
                   className="rounded-circle"
@@ -369,7 +369,7 @@ const chat = () => {
                           id={mensaje.idMensaje}
                         >
                           <img
-                            src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg"
+                            src="https://img.freepik.com/vector-gratis/icono-plano-usuario-anonimo-ilustracion-vector-larga-sombra_520826-1932.jpg"
                             alt="user"
                             width="50"
                             className="rounded-circle"

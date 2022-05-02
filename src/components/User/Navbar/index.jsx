@@ -18,7 +18,7 @@ import {
 import axios from "axios";
 import { FaSignOutAlt } from "react-icons/fa";
 import { style } from "@mui/system";
-
+import swal from "sweetalert";
 const Navbar = () => {
   const user = useContext(ContextUser);
   const { Socket } = useContext(ContextSocket);
@@ -273,7 +273,7 @@ const Navbar = () => {
           {user.logged ? (
             <ul className="ul">
               <li className="li">
-                <Link href="user/ventas">
+                <Link href="/user/ventas">
                   <BiShoppingBag size="30" />
                 </Link>
               </li>
@@ -304,27 +304,44 @@ const Navbar = () => {
             <></>
           )}
           {user.logged ? (
-            <div className="loginButtons">
-              <Button
-                as="a"
-                width="120px"
-                onClick={() => {
-                  router.push("/user/ventas/mostrarVentas");
-                }}
-              >
-                Crear Anuncio
-              </Button>
-              <Button
-                as="a"
-                width="120px"
-                onClick={() => {
-                  router.push("/user/ventas/insertarVentas");
-                }}
-              >
-                Publicar Producto
-              </Button>
-            </div>
+            <ul className="ul">
+              <li className="li">
+                <Link href="/user/ventas">
+                  <a className="link">Crear Anuncio</a>
+                </Link>
+              </li>
+              <li className="li">
+                <Link href="/">
+                  <a className="nolin">o</a>
+                </Link>
+              </li>
+              <li className="li">
+                <Link href="/user/ventas/insertarVentas">
+                  <a className="link">Publicar Producto</a>
+                </Link>
+              </li>
+            </ul>
           ) : (
+            // <div className="loginButtons">
+            //   <Button
+            //     as="a"
+            //     width="120px"
+            //     onClick={() => {
+            //       router.push("/user/ventas");
+            //     }}
+            //   >
+            //     Crear Anuncio
+            //   </Button>
+            //   <Button
+            //     as="a"
+            //     width="120px"
+            //     onClick={() => {
+            //       router.push("/user/ventas/insertarVentas");
+            //     }}
+            //   >
+            //     Publicar Producto
+            //   </Button>
+            // </div>
             <ul className="ul">
               <li className="li">
                 <Link href="/register">
