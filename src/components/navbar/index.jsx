@@ -15,7 +15,7 @@ import { style } from "@mui/system";
 import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const buscar = async (categoria, busqueda, departamento) => {
+  const buscar = async (categoria, busqueda, departamento,precio) => {
     const URI = "/Busqueda?";
     if (categoria !== "Elige una Cat") {
       URI = URI + "&categoria=" + categoria;
@@ -25,6 +25,9 @@ const Navbar = () => {
     }
     if (busqueda !== "") {
       URI = URI + "&busqueda=" + busqueda;
+    }
+    if (precio !== "") {
+      URI = URI + "&precio=" + precio;
     }
 
     await router.push(URI);
@@ -55,6 +58,8 @@ const Navbar = () => {
 
   const [busqueda, setBusqueda] = useState("");
   const [departamento, setDepartamento] = useState("");
+
+  const [precio, setPrecio] = useState("");
 
   const router = useRouter();
   return (
@@ -127,11 +132,27 @@ const Navbar = () => {
                 <option>Intibuca</option>
               </select>
             </div>
+
+            <div className="precio">
+              <label className="form-label"></label>
+              <select
+                className="form-control"
+                value={precio}
+                onChange={(e) => {
+                  setPrecio(e.target.value);
+                }}
+              >
+                <option>Seleccione precio</option>
+                <option>min a max</option>
+                <option>max a min</option>
+              </select>
+            </div>
+            
           </div>
           <div className="boton">
             <button
               onClick={() => {
-                buscar(categoria, busqueda, departamento);
+                buscar(categoria, busqueda, departamento,precio);
               }}
               type="submit"
               className="buscar"
