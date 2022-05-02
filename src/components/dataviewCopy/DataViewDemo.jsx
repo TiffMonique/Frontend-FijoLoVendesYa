@@ -11,7 +11,7 @@ export class DataViewDemo extends Component {
     super(props);
     this.state = {
       products: null,
-      layout: "grid",
+      layout: "list",
       sortKey: null,
       sortOrder: null,
       sortField: null,
@@ -132,7 +132,7 @@ export class DataViewDemo extends Component {
     }
 
     if (layout === "list") return this.renderListItem(product);
-    else if (layout === "grid") return this.renderGridItem(product);
+    else if (layout === "grid") return this.renderListItem(product);
   }
 
   renderHeader() {

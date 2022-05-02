@@ -15,19 +15,6 @@ const Container = styled.div`
 const slider = styled.div`
   height: 500px;
 `;
-// const Colum1 = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   width: 100%;
-//   margin-top: 50px;
-// `;
-
-// const Colum2 = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   width: 20%;
-//   margin-top: 125px;
-// `;
 
 const index = () => {
   return (

@@ -50,10 +50,6 @@ const index = () => {
         <Colum1 className="columWidth">
           <CarouselDemo />
         </Colum1>
-
-        <Colum2>
-          <PanelMenu />
-        </Colum2>
       </Container>
       <Container>
         <DataViewDemo />

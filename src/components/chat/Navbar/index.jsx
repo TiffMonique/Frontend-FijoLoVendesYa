@@ -17,23 +17,26 @@ import {
 const Navbar = () => {
   const user = useContext(ContextUser);
   const router = useRouter();
-  const {chats, sinleer, setsinleer}= useContext(ContextChat);
+  const { chats, sinleer, setsinleer } = useContext(ContextChat);
   useEffect(() => {
     var noleido = false;
-    chats.forEach(chat => {
-      if(chat.mensajes) {
-        if(chat.sinleer && chat.mensajes[chat.mensajes.length-1].idUsuario != user.idUsuario){
+    chats.forEach((chat) => {
+      if (chat.mensajes) {
+        if (
+          chat.sinleer &&
+          chat.mensajes[chat.mensajes.length - 1].idUsuario != user.idUsuario
+        ) {
           noleido = true;
         }
       }
     });
-    setsinleer(noleido)
+    setsinleer(noleido);
   }, [chats]);
   return (
     <StyledNavbarContainer>
       <div className="container">
         <Link href="/">
-          <img className="logo" src="/images/logo.png" />
+          <img className="logo" src="/images/logo.jpg" />
         </Link>
 
         <div className="content">
@@ -45,22 +48,18 @@ const Navbar = () => {
             </li>
 
             <li className="li">
-            {(sinleer)?
-              <Link href="">
-                <BiMessageRoundedError size="30" />
-              </Link>
-              :
-              <Link href="">
-                <BiMessageRounded size="30" />
-              </Link>}
+              {sinleer ? (
+                <Link href="">
+                  <BiMessageRoundedError size="30" />
+                </Link>
+              ) : (
+                <Link href="">
+                  <BiMessageRounded size="30" />
+                </Link>
+              )}
             </li>
             <li className="li">
-              <Link href="/">
-                <BiUser size="30" />
-              </Link>
-            </li>
-            <li className="li">
-              <Link href="">
+              <Link href="/user/favoritos">
                 <BiHeart size="30" />
               </Link>
             </li>

@@ -53,44 +53,49 @@ export class DataViewDemo extends Component {
     }
   }
 
-  eliminarFavorito= async (idLista) => {
-      swal({
-        title: "Favoritos",
-        text: "¿Desea eliminar favorito?",
-        icon: "info",
-        buttons: true,
-      }).then((acepta)=>{
-        if (acepta) {
-        axios.delete(
-          `http://localhost:4000/api/tienda/eliminarFavorito/${idLista}`,
-          {
-            withCredentials: true,
-          }
-        ).then((response)=>{
-          swal({
-            title: "FAVORITO ELIMINADO",
-            text: response?.data?.message,
-            icon: "success",
-            button: "Aceptar",
-            timer: "false",
+  eliminarFavorito = async (idLista) => {
+    swal({
+      title: "Favoritos",
+      text: "¿Desea eliminar favorito?",
+      icon: "info",
+      buttons: true,
+    }).then((acepta) => {
+      if (acepta) {
+        axios
+          .delete(
+            `http://localhost:4000/api/tienda/eliminarFavorito/${idLista}`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            swal({
+              title: "FAVORITO ELIMINADO",
+              text: response?.data?.message,
+              icon: "success",
+              button: "Aceptar",
+              timer: "false",
+            });
+            var productos = this.state.products;
+            const eliminado = productos.findIndex(
+              (producto) => producto.idLista == idLista
+            );
+            productos.splice(eliminado, 1);
+            this.setState({ products: productos });
+            console.log(productos);
+          })
+          .catch((err) => {
+            swal({
+              title: "HA OCURRIDO UN ERROR",
+              text: err.response.data.message,
+              icon: "error",
+              button: "Aceptar",
+              timer: "false",
+            });
           });
-          var productos = this.state.products;
-          const eliminado=productos.findIndex((producto)=> producto.idLista==idLista)
-          productos.splice(eliminado,1);
-          this.setState({products:productos});
-          console.log(productos);
-        }).catch((err)=>{
-          swal({
-            title: "HA OCURRIDO UN ERROR",
-            text: err.response.data.message,
-            icon: "error",
-            button: "Aceptar",
-            timer: "false",
-          });
-         });
-        }
-      }); 
-    }
+      }
+    });
+  };
 
   renderListItem(data) {
     return (
@@ -112,17 +117,14 @@ export class DataViewDemo extends Component {
           </div>
           <div className="product-list-action">
             <span className="product-price">L.{data.precio}</span>
-            <a >
-            <Button
-              icon="pi pi-shopping-cart"
-              label="Ver más"
-              disabled={data.estado.toLowerCase()}
-            ></Button>
+            <a href={"/product/" + data.idVenta}>
+              <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
             </a>
             <Button
-              icon="pi pi-shopping-cart"
+              styleClass="ui-button-raised ui-button-danger"
+              icon="pi pi-times"
               label="Quitar"
-              onClick={()=>this.eliminarFavorito(data.idLista)}
+              onClick={() => this.eliminarFavorito(data.idLista)}
             ></Button>
             <span
               className={`product-badge status-${data.estado.toLowerCase()}`}
@@ -153,15 +155,15 @@ export class DataViewDemo extends Component {
           <div className="product-grid-item-content  imagenes">
             <a>
               <img
-              src={`http://localhost:4000/uploads/${data.foto}`}
-              onError={(e) =>
-                (e.target.src =
-                  "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
-              }
-              alt={data.nombre}
-            />
+                src={`http://localhost:4000/uploads/${data.foto}`}
+                onError={(e) =>
+                  (e.target.src =
+                    "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
+                }
+                alt={data.nombre}
+              />
             </a>
-            
+
             <div className="product-name">{data.producto}</div>
             <div className="product-description"></div>
             <Rating value={data.calificacion} cancel={false}></Rating>
@@ -173,9 +175,10 @@ export class DataViewDemo extends Component {
               <Button icon="pi pi-shopping-cart" label="Ver más"></Button>
             </a>
             <Button
-              icon="pi pi-shopping-cart"
+              styleClass="ui-button-raised ui-button-danger"
+              icon="pi pi-times"
               label="Quitar"
-              onClick={()=>this.eliminarFavorito(data.idLista)}
+              onClick={() => this.eliminarFavorito(data.idLista)}
             ></Button>
           </div>
         </div>
@@ -189,7 +192,7 @@ export class DataViewDemo extends Component {
     }
 
     if (layout === "list") return this.renderListItem(product);
-    else if (layout === "grid") return this.renderGridItem(product);
+    else if (layout === "grid") return this.renderListItem(product);
   }
 
   renderHeader() {

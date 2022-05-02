@@ -15,7 +15,7 @@ import { style } from "@mui/system";
 import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const buscar = async (categoria, busqueda, departamento,precio) => {
+  const buscar = async (categoria, busqueda, departamento, precio) => {
     const URI = "/Busqueda?";
     if (categoria !== "Elige una Cat") {
       URI = URI + "&categoria=" + categoria;
@@ -66,7 +66,7 @@ const Navbar = () => {
     <StyledNavbarContainer>
       <div className="container">
         <Link href="/">
-          <img className="logo" src="/images/logo.png" />
+          <img className="logo" src="/images/logo.jpg" />
         </Link>
 
         <div className="search" style={{ display: "flex", margin: "10px" }}>
@@ -147,12 +147,11 @@ const Navbar = () => {
                 <option>max a min</option>
               </select>
             </div>
-            
           </div>
           <div className="boton">
             <button
               onClick={() => {
-                buscar(categoria, busqueda, departamento,precio);
+                buscar(categoria, busqueda, departamento, precio);
               }}
               type="submit"
               className="buscar"

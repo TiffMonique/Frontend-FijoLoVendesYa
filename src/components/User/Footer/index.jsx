@@ -5,17 +5,17 @@ const Footer = () => {
   return (
     <StyledFooterContainer>
       <div className="container">
-        <img className="logo" src="/images/logo.png" />
+        <img className="logo" src="/images/logo.jpg" />
 
         <ul className="ul">
           <li className="li">
-            <Link href="/">Home</Link>
+            <Link href="/">Inicio</Link>
           </li>
           <li className="li">
-            <Link href="/login">Login</Link>
+            <Link href="/login">Ingresar</Link>
           </li>
           <li className="li">
-            <Link href="/register">Register</Link>
+            <Link href="/register">Registrarse</Link>
           </li>
         </ul>
       </div>

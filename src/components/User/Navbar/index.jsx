@@ -23,7 +23,13 @@ const Navbar = () => {
   const user = useContext(ContextUser);
   const { Socket } = useContext(ContextSocket);
   const { chats, sinleer, setsinleer } = useContext(ContextChat);
-  const buscar = async (categoria, busqueda, departamento, precioMin, precioMax) => {
+  const buscar = async (
+    categoria,
+    busqueda,
+    departamento,
+    precioMin,
+    precioMax
+  ) => {
     const URI = "/Busqueda/?";
     if (categoria !== "Elige una Cat") {
       URI = URI + "&categoria=" + categoria;
@@ -84,14 +90,17 @@ const Navbar = () => {
   };
   useEffect(() => {
     var noleido = false;
-    chats.forEach(chat => {
-      if(chat.mensajes) {
-        if(chat.sinleer && chat.mensajes[chat.mensajes.length-1].idUsuario != user.idUsuario){
+    chats.forEach((chat) => {
+      if (chat.mensajes) {
+        if (
+          chat.sinleer &&
+          chat.mensajes[chat.mensajes.length - 1].idUsuario != user.idUsuario
+        ) {
           noleido = true;
         }
       }
     });
-    setsinleer(noleido)
+    setsinleer(noleido);
   }, [chats]);
 
   useEffect(() => {
@@ -120,7 +129,6 @@ const Navbar = () => {
     if (precioMax) {
       setPrecioMax(precioMax);
     }
-
   }, []);
 
   const [categorias, setCategorias] = useState([]);
@@ -154,7 +162,7 @@ const Navbar = () => {
     <StyledNavbarContainer>
       <div className="container">
         <Link href="/">
-          <img className="logo" src="/images/logo.png" />
+          <img className="logo" src="/images/logo.jpg" />
         </Link>
 
         <div className="search" style={{ display: "flex", margin: "-10px" }}>
@@ -221,41 +229,37 @@ const Navbar = () => {
               </select>
             </div>
 
-            
-
             <div className="precio Minimo">
-            <label className="form-label"></label>
-             
+              <label className="form-label"></label>
+
               <Input
-               
                 placeholder="Min"
                 value={precioMin}
                 onChange={(e) => {
-                setPrecioMin(e.target.value);
-                console.log(precioMin);
-            }}
-            />
+                  setPrecioMin(e.target.value);
+                  console.log(precioMin);
+                }}
+              />
             </div>
 
             <div className="precio-Maximo">
-            <label className="form-label"></label>
-            
+              <label className="form-label"></label>
+
               <Input
                 className="precio"
                 placeholder="Max"
                 value={precioMax}
                 onChange={(e) => {
-                setPrecioMax(e.target.value);
-                console.log(precioMax);
-              }}
-            />
+                  setPrecioMax(e.target.value);
+                  console.log(precioMax);
+                }}
+              />
             </div>
-
           </div>
           <div className="boton">
             <button
               onClick={() => {
-                buscar(categoria, busqueda, departamento,precioMin,precioMax);
+                buscar(categoria, busqueda, departamento, precioMin, precioMax);
               }}
               type="submit"
               className="buscar"

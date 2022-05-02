@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <StyledFooterContainer>
       <div className="container">
-        <img className="logo" src="/images/logo.png" />
+        <img className="logo" src="/images/logo.jpg" />
 
         <ul className="ul">
           <li className="li">

@@ -17,10 +17,9 @@ const Navbar = () => {
     <StyledNavbarContainer>
       <div className="container">
         <Link href="/">
-          <img className="logo" src="/images/logo.png" />
+          <img className="logo" src="/images/logo.jpg" />
         </Link>
 
-        
         <div className="content">
           <ul className="ul">
             <li className="li">
@@ -31,7 +30,7 @@ const Navbar = () => {
 
             <li className="li">
               <Link href="/chat/">
-                <BiMessageRounded size="30"/>
+                <BiMessageRounded size="30" />
               </Link>
             </li>
             <li className="li">
