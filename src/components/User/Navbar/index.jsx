@@ -115,7 +115,6 @@ const Navbar = () => {
     if (precioMin) {
       setPrecioMin(precioMin);
     }
-    setPrecioMax("");
     const precioMax = query.get("precioMax");
     if (precioMax) {
       setPrecioMax(precioMax);
