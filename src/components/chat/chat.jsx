@@ -280,7 +280,7 @@ const chat = () => {
                               handleClicChat(chat.idChat);
                             }}
                             className={
-                              (chat.sinleer)?
+                              (chat.sinleer && chat.mensajes[chat.mensajes.length-1].idUsuario != user.idUsuario)?
                               "list-group-item list-group-item-success rounded-0"
                               :
                               (chat.idChat == chatActual.idChat 

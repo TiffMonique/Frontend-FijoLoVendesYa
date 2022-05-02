@@ -84,12 +84,14 @@ const Navbar = () => {
   };
   useEffect(() => {
     var noleido = false;
-    chats.forEach((chat) => {
-      if (chat.sinleer) {
-        noleido = true;
+    chats.forEach(chat => {
+      if(chat.mensajes) {
+        if(chat.sinleer && chat.mensajes[chat.mensajes.length-1].idUsuario != user.idUsuario){
+          noleido = true;
+        }
       }
     });
-    setsinleer(noleido);
+    setsinleer(noleido)
   }, [chats]);
 
   useEffect(() => {
