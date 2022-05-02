@@ -21,14 +21,14 @@ export const StyledNavbarContainer = styled.nav`
   }
 
   .boton {
-    margin-left: -3px;
+    margin-left: 160px;
     
     
   }
 
   .search{
     
-    margin-right: 250px!important;
+    margin-right: 200px!important;
     
     
     
@@ -36,6 +36,7 @@ export const StyledNavbarContainer = styled.nav`
   }
 
   .form-control{
+    width: 125px;
    
   }
 
@@ -53,21 +54,24 @@ export const StyledNavbarContainer = styled.nav`
 
   .categorias{
     
+    
    
 
   }
 
   .departamentos{
+   
     
   }
 
   .form-label {
     display: block
+    
   }
 
   
 .ui.input>input{
-  width: 50px!important;
+  width: 80px!important;
   top: 39px;
  
 }
@@ -131,9 +135,13 @@ export const StyledNavbarContainer = styled.nav`
   }
 
 .item-input{
-  width: 24vw;
+  width: 20vw;
   margin-top: 8px;
  
+}
+
+.precio {
+  
 }
 
 .ui{

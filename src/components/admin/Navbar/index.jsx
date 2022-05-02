@@ -20,13 +20,7 @@ const Navbar = () => {
           <img className="logo" src="/images/logo.png" />
         </Link>
 
-        <div className="search">
-          <Input
-            className="item-input"
-            action={{ icon: "search" }}
-            placeholder="Search..."
-          />
-        </div>
+        
         <div className="content">
           <ul className="ul">
             <li className="li">

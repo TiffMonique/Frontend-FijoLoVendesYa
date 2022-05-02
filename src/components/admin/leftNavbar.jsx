@@ -117,20 +117,7 @@ function LeftNavbar() {
               <a>Usuarios</a>
             </Link>
           </li>
-          <li>
-            <FontAwesomeIcon
-              icon={faMessage}
-              style={{ width: "18px", cursor: "pointer" }}
-            />{" "}
-            <a href="#">Chat</a>
-          </li>
-          <li>
-            <FontAwesomeIcon
-              icon={faUser}
-              style={{ width: "18px", cursor: "pointer" }}
-            />{" "}
-            <a href="#"> Perfil</a>
-          </li>
+          
           <li>
             <FontAwesomeIcon
               icon={faSignOutAlt}

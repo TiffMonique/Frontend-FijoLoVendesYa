@@ -45,7 +45,7 @@ const CompMostrarUsuarios = () => {
       warningMode: true,
     }).then((result) => {
       if (result) {
-        deleteVentas(idUsuarios);
+        deleteUsuarios(idUsuarios);
         swal("Borrado Completo!", "Se eliminó el usuario.", "success");
       }
     });

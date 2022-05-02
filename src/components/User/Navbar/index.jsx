@@ -108,12 +108,12 @@ const Navbar = () => {
     if (category) {
       setCategoria(category);
     }
-    setPrecioMin("Elige un Precio");
+    setPrecioMin("");
     const precioMin = query.get("precioMin");
     if (precioMin) {
-      setPrecioMax(precioMin);
+      setPrecioMin(precioMin);
     }
-    setPrecioMax("Elige un Precio");
+    setPrecioMax("");
     const precioMax = query.get("precioMax");
     if (precioMax) {
       setPrecioMax(precioMax);
@@ -155,7 +155,7 @@ const Navbar = () => {
           <img className="logo" src="/images/logo.png" />
         </Link>
 
-        <div className="search" style={{ display: "flex", margin: "10px" }}>
+        <div className="search" style={{ display: "flex", margin: "-10px" }}>
           <Input
             className="item-input"
             placeholder="Search..."
@@ -219,11 +219,14 @@ const Navbar = () => {
               </select>
             </div>
 
+            
+
             <div className="precio Minimo">
-              <label className="form-label"></label>
+            <label className="form-label"></label>
+             
               <Input
-                className="item-input"
-                placeholder="Precio Minimo"
+               
+                placeholder="Min"
                 value={precioMin}
                 onChange={(e) => {
                 setPrecioMin(e.target.value);
@@ -232,11 +235,12 @@ const Navbar = () => {
             />
             </div>
 
-            <div className="precio Maximo">
-              <label className="form-label"></label>
+            <div className="precio-Maximo">
+            <label className="form-label"></label>
+            
               <Input
-                className="item-input"
-                placeholder="Precio Maximo"
+                className="precio"
+                placeholder="Max"
                 value={precioMax}
                 onChange={(e) => {
                 setPrecioMax(e.target.value);
