@@ -14,8 +14,7 @@ const arrayImage = [
   { imagen: "images/motos.jpg" },
   { imagen: "images/carroClasic.jpg" },
   { imagen: "images/gatos.jpg" },
-  { imagen: "images/futureParents.jpg" }
-  
+  { imagen: "images/futureParents.jpg" },
 ];
 
 const CarouselDemo = () => {
@@ -41,9 +40,7 @@ const CarouselDemo = () => {
   const productService = new ProductService();
 
   useEffect(() => {
-    productService
-      .getProducts()
-      .then((data) => setProducts(data.slice(0, 9)));
+    productService.getProducts().then((data) => setProducts(data.slice(0, 9)));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const productTemplate = (data) => {
@@ -51,7 +48,8 @@ const CarouselDemo = () => {
       <div className="product-item">
         <div className="product-item-content">
           <div className="mb-3 ">
-            <img style={{height: "130px", width: "130px"}}
+            <img
+              style={{ height: "130px", width: "130px" }}
               src={`http://localhost:4000/uploads/${data.foto}`}
               onError={(e) =>
                 (e.target.src =
@@ -67,13 +65,13 @@ const CarouselDemo = () => {
 
             <span className="product-badge status">{data.estado}</span>
             <div className="car-buttons mt-5">
-            <a href={"/product/" + data.idVenta}>
-            <Button
-                label="Ver mas"
-                icon="pi pi-search"
-                className="p-button p-button-rounded "
-            />
-            </a>
+              <a href={"/product/" + data.idVenta}>
+                <Button
+                  label="Ver mas"
+                  icon="pi pi-search"
+                  className="p-button p-button-rounded "
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -96,19 +94,21 @@ const CarouselDemo = () => {
         />
       </div>
       <div className="titulo">
-        <h1>Populares</h1>
+        <h1>Galería</h1>
       </div>
       <div className="grid">
         {arrayImage.map((imagen) => (
           <div className="col-12 md:col-6 lg:col-3">
             <div className="surface-0 shadow-2 p-3 border-1 border-50 border-round">
               <div className="flex justify-content-between mb-3 imagenes">
-                <img style={{height: "300px", width: "260px", float: "left"}} src={imagen.imagen} />
+                <img
+                  style={{ height: "300px", width: "260px", float: "left" }}
+                  src={imagen.imagen}
+                />
               </div>
             </div>
           </div>
         ))}
-        
       </div>
     </>
   );

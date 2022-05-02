@@ -77,6 +77,7 @@ const validationSchema = yup.object({
 });
 
 export function SignupForm(props) {
+  const router = useRouter();
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
 
@@ -101,7 +102,7 @@ export function SignupForm(props) {
             telefono: telefono,
             pass: pass,
             direccion: direccion,
-            departamento: departamento
+            departamento: departamento,
           })
           .then((response) => {
             {
@@ -114,6 +115,7 @@ export function SignupForm(props) {
               });
             }
             formik.resetForm();
+            router.push("/login");
           })
           .catch((err) => {
             //  console.log(response);
@@ -158,7 +160,7 @@ export function SignupForm(props) {
   });
 
   const theme = createTheme();
-  const [departamento, setDepartamento] = useState('');
+  const [departamento, setDepartamento] = useState("");
 
   return (
     <ThemeProvider theme={theme} onSubmit={formik.handleSubmit}>
@@ -279,13 +281,10 @@ export function SignupForm(props) {
 
               <select
                 className="form-control"
-                
                 value={departamento}
                 onChange={(e) => {
                   setDepartamento(e.target.value);
-               
                 }}
-
               >
                 <option>Elige un Depto</option>
                 <option>Yoro</option>
@@ -306,9 +305,7 @@ export function SignupForm(props) {
                 <option>Comayagua</option>
                 <option>Copan</option>
                 <option>Intibuca</option>
-
               </select>
-
             </div>
 
             <TextField

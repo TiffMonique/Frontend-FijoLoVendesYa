@@ -473,6 +473,9 @@ const chat = () => {
                             </div>
                             <div>
                               <div className="p-4 md:p-5">
+                                <p className=" text-blue-10 md:text-lg">
+                                  Me interesa este producto:
+                                </p>
                                 <p className="font-bold text-xl md:text-2xl">
                                   {JSON.parse(mensaje.mensaje).producto}
                                 </p>
