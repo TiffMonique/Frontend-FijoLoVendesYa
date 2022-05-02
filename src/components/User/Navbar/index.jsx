@@ -23,7 +23,7 @@ const Navbar = () => {
   const user = useContext(ContextUser);
   const { Socket } = useContext(ContextSocket);
   const { chats, sinleer, setsinleer } = useContext(ContextChat);
-  const buscar = async (categoria, busqueda, departamento) => {
+  const buscar = async (categoria, busqueda, departamento, precioMin, precioMax) => {
     const URI = "/Busqueda/?";
     if (categoria !== "Elige una Cat") {
       URI = URI + "&categoria=" + categoria;
@@ -33,6 +33,12 @@ const Navbar = () => {
     }
     if (busqueda !== "") {
       URI = URI + "&busqueda=" + busqueda;
+    }
+    if (precioMin !== "") {
+      URI = URI + "&precioMin=" + precioMin;
+    }
+    if (precioMax !== "") {
+      URI = URI + "&precioMax=" + precioMax;
     }
 
     await router.push(URI);
@@ -102,6 +108,17 @@ const Navbar = () => {
     if (category) {
       setCategoria(category);
     }
+    setPrecioMin("Elige un Precio");
+    const precioMin = query.get("precioMin");
+    if (precioMin) {
+      setPrecioMax(precioMin);
+    }
+    setPrecioMax("Elige un Precio");
+    const precioMax = query.get("precioMax");
+    if (precioMax) {
+      setPrecioMax(precioMax);
+    }
+
   }, []);
 
   const [categorias, setCategorias] = useState([]);
@@ -126,6 +143,8 @@ const Navbar = () => {
   const [categoria, setCategoria] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const [departamento, setDepartamento] = useState("");
+  const [precioMin, setPrecioMin] = useState("");
+  const [precioMax, setPrecioMax] = useState("");
 
   const router = useRouter();
 
@@ -199,11 +218,38 @@ const Navbar = () => {
                 <option>Intibuca</option>
               </select>
             </div>
+
+            <div className="precio Minimo">
+              <label className="form-label"></label>
+              <Input
+                className="item-input"
+                placeholder="Precio Minimo"
+                value={precioMin}
+                onChange={(e) => {
+                setPrecioMin(e.target.value);
+                console.log(precioMin);
+            }}
+            />
+            </div>
+
+            <div className="precio Maximo">
+              <label className="form-label"></label>
+              <Input
+                className="item-input"
+                placeholder="Precio Maximo"
+                value={precioMax}
+                onChange={(e) => {
+                setPrecioMax(e.target.value);
+                console.log(precioMax);
+              }}
+            />
+            </div>
+
           </div>
           <div className="boton">
             <button
               onClick={() => {
-                buscar(categoria, busqueda, departamento);
+                buscar(categoria, busqueda, departamento,precioMin,precioMax);
               }}
               type="submit"
               className="buscar"
