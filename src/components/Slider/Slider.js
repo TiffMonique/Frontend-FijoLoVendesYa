@@ -17,15 +17,21 @@ function ImageSlider() {
   //PROCEDIMIENTO PARA OBTENER LAS CATEGORIAS
   const getCategorias = async () => {
     const categorias = await axios.get(URI);
-    const suscripciones = await axios.get(
-      "http://localhost:4000/api/tienda/missuscripciones",
-      { withCredentials: true }
-    );
-    const categoriasM = categorias.data.map((categoria) => {
-      const suscrito = suscripciones.data.includes(categoria.nombre);
-      return { ...categoria, suscrito: suscrito };
-    });
-    setCateg(categoriasM);
+    const suscripciones = await axios
+      .get("http://localhost:4000/api/tienda/missuscripciones", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const categoriasM = categorias.data.map((categoria) => {
+          const suscrito = suscripciones.data.includes(categoria.nombre);
+          return { ...categoria, suscrito: suscrito };
+        });
+        setCateg(categoriasM);
+      })
+      .catch((err) => {
+        console.log(err + "error de suscripciones");
+        setCateg(categorias.data);
+      });
   };
 
   const setSuscripcion = async (suscri, nombre) => {

@@ -14,49 +14,32 @@ import {
 import { style } from "@mui/system";
 import { useLocation } from "react-router-dom";
 
-
-
 const Navbar = () => {
-
-
-  const buscar = async (categoria, busqueda , departamento) => {
-
-    
-    const URI = "/Busqueda?"
-    if(categoria !== "Elige una Cat"){
-      URI = URI + "&categoria="+categoria
-    } 
-    if(departamento !== "Elige un Depto"){
-      URI = URI + "&departamento="+departamento
+  const buscar = async (categoria, busqueda, departamento,precio) => {
+    const URI = "/Busqueda?";
+    if (categoria !== "Elige una Cat") {
+      URI = URI + "&categoria=" + categoria;
     }
-    if(busqueda !== ""){
-      URI = URI + "&busqueda="+busqueda
+    if (departamento !== "Elige un Depto") {
+      URI = URI + "&departamento=" + departamento;
+    }
+    if (busqueda !== "") {
+      URI = URI + "&busqueda=" + busqueda;
+    }
+    if (precio !== "") {
+      URI = URI + "&precio=" + precio;
     }
 
-
-    
     await router.push(URI);
     location.reload();
     //then((response) => { console.log(response) })
-   /* if (response.data) {
+    /* if (response.data) {
       setBusqueda(response.data);
    */
-    }
-    
-   
-
- 
- 
-   
-
-  
- 
+  };
   useEffect(() => {
-    
-    setDepartamento("Elige un Depto")
+    setDepartamento("Elige un Depto");
     listacategorias();
-    
-    
   }, []);
 
   const listacategorias = async (e) => {
@@ -72,13 +55,11 @@ const Navbar = () => {
 
   const [categorias, setCategorias] = useState([]);
   const [categoria, setCategoria] = useState("");
-  
 
-  const [busqueda, setBusqueda] = useState('');
-  const [departamento, setDepartamento] = useState('');
+  const [busqueda, setBusqueda] = useState("");
+  const [departamento, setDepartamento] = useState("");
 
-
-
+  const [precio, setPrecio] = useState("");
 
   const router = useRouter();
   return (
@@ -88,49 +69,37 @@ const Navbar = () => {
           <img className="logo" src="/images/logo.png" />
         </Link>
 
-        <div className="search" style = {{display: "flex", margin:"10px" }}>
+        <div className="search" style={{ display: "flex", margin: "10px" }}>
           <Input
-            
             className="item-input"
             placeholder="Search..."
             value={busqueda}
             onChange={(e) => {
               setBusqueda(e.target.value);
-            
-            console.log(busqueda)
-           
+
+              console.log(busqueda);
             }}
-            
-            
           />
 
-          <div className="select" style = {{display: "flex", width: "250px"}}  >
-
+          <div className="select" style={{ display: "flex", width: "250px" }}>
             <div className="categorias">
-
-              <label className="form-label" ></label>
+              <label className="form-label"></label>
               <select
                 name="categoria"
-               
                 className="form-control"
                 multiple={false}
                 value={categoria}
                 onChange={(e) => {
                   setCategoria(e.target.value);
-                
-               
                 }}
               >
-
                 {categorias.map((elemento) => (
                   <option key={elemento.nombre} value={elemento.nombre}>
                     {elemento.nombre}
                   </option>
                 ))}
               </select>
-
             </div>
-
 
             <div className="departamentos">
               <label className="form-label"></label>
@@ -140,9 +109,7 @@ const Navbar = () => {
                 value={departamento}
                 onChange={(e) => {
                   setDepartamento(e.target.value);
-               
                 }}
-
               >
                 <option>Elige un Depto</option>
                 <option>Yoro</option>
@@ -163,15 +130,34 @@ const Navbar = () => {
                 <option>Comayagua</option>
                 <option>Copan</option>
                 <option>Intibuca</option>
-
               </select>
-
             </div>
 
+            <div className="precio">
+              <label className="form-label"></label>
+              <select
+                className="form-control"
+                value={precio}
+                onChange={(e) => {
+                  setPrecio(e.target.value);
+                }}
+              >
+                <option>Seleccione precio</option>
+                <option>min a max</option>
+                <option>max a min</option>
+              </select>
+            </div>
+            
           </div>
-          <div className="boton" >
-            <button  onClick={()=>{buscar(categoria, busqueda, departamento)}}
-            type='submit' className="buscar">Buscar
+          <div className="boton">
+            <button
+              onClick={() => {
+                buscar(categoria, busqueda, departamento,precio);
+              }}
+              type="submit"
+              className="buscar"
+            >
+              Buscar
             </button>
           </div>
         </div>
