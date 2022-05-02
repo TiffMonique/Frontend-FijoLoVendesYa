@@ -1,5 +1,5 @@
 import Button from "../components/button";
-import NavAndFooter from "../layouts/NavAndFooter";
+import NavAndFooter from "../components/User/NavAndFooter";
 import ImageSliderHome from "../components/SliderHome/Slider";
 import CarouselDemo from "../components/carousel/CarouselDemo";
 import PanelMenu from "../components/PanelMenu/PanelMenu";
